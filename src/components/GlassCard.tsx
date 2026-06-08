@@ -35,6 +35,6 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     borderWidth: 1,
     overflow: 'hidden',
-    backdropFilter: 'blur(10px)',
+    // backdropFilter: 'blur(10px)', // Note: Not directly supported in React Native, use platform-specific solutions
   },
 });

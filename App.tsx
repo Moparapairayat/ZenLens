@@ -11,7 +11,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { RootNavigator } from './src/navigation';
 import { ThemeProvider } from './src/context/ThemeContext';
 import { AuthProvider } from './src/context/AuthContext';
-import { ProtectedWrapper } from './src/components/ProtectedWrapper';
+import ProtectedWrapper from './src/components/ProtectedWrapper';
 import { initializeDB } from './src/db/init';
 import { initializeSecureStore } from './src/security/dbKey';
 

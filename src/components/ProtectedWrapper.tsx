@@ -11,6 +11,7 @@ import {
   TouchableOpacity,
   Text,
   AppState,
+  AppStateStatus,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
@@ -91,7 +92,7 @@ export default function ProtectedWrapper({ children }: ProtectedWrapperProps): J
       }, INACTIVITY_TIMEOUT);
     }
 
-    appState.current = nextAppState;
+    appState.current = nextAppState as AppStateStatus;
   };
 
   /**

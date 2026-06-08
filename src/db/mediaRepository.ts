@@ -3,7 +3,7 @@
  * CRUD operations for media and metadata with proper type safety
  */
 import { getDatabase } from './init';
-import { v4 as uuidv4 } from 'react-native-uuid';
+import v4 from 'react-native-uuid';
 
 export interface MediaRecord {
   id: string;
@@ -49,7 +49,7 @@ export interface EditOperation {
  * Add new media record
  */
 export async function addMediaRecord(media: Omit<MediaRecord, 'id'>): Promise<string> {
-  const id = uuidv4();
+  const id = v4();
   const db = getDatabase();
 
   return new Promise((resolve, reject) => {
@@ -169,7 +169,7 @@ export async function getAllMedia(
  * Add metadata record
  */
 export async function addMetadataRecord(metadata: Omit<MetadataRecord, 'id'>): Promise<string> {
-  const id = uuidv4();
+  const id = v4();
   const db = getDatabase();
 
   return new Promise((resolve, reject) => {
@@ -243,7 +243,7 @@ export async function getMetadataRecord(mediaId: string): Promise<MetadataRecord
  * Add edit operation
  */
 export async function addEditOperation(edit: Omit<EditOperation, 'id'>): Promise<string> {
-  const id = uuidv4();
+  const id = v4();
   const db = getDatabase();
 
   return new Promise((resolve, reject) => {

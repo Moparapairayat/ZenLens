@@ -38,7 +38,7 @@ export default function BrushMaskEditor({
       },
       onPanResponderMove: (evt: GestureResponderEvent) => {
         if (isDrawing) {
-          const { x, y } = evt.nativeEvent;
+          const { x, y } = evt.nativeEvent as any;
           pathRef.current += ` L${x} ${y}`;
         }
       },
