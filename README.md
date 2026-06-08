@@ -9,22 +9,22 @@ A production-ready React Native application for offline, local-first photo manag
 - 🔍 **AI-Powered Search**: Natural language queries with embedding-based similarity search
 - 📚 **Smart Albums**: Automatic clustering of similar photos (K-Means, DBSCAN)
 - 🔒 **App Lock**: PIN + Biometric authentication with secure storage
-- 🎬 **Cinematic UI**: Glass cards, neon accents, smooth animations with Reanimated v2
+- 🎬 **Cinematic UI**: Glass cards, neon accents, smooth animations with Reanimated 4
 - ⚡ **GPU Rendering**: Real-time filters via Shopify React Native Skia
 - 📱 **Offline First**: All features work without internet; cloud is optional
 - 🚀 **Performance**: Background indexing, progressive thumbnails, quantized embeddings
 
 ## Tech Stack
 
-- **Framework**: React Native with TypeScript
+- **Framework**: Expo SDK 56, React 19, React Native 0.85, TypeScript
 - **Navigation**: React Navigation (Stack + Tabs)
-- **Animation**: React Native Reanimated v2
+- **Animation**: React Native Reanimated 4 + Worklets
 - **GPU Rendering**: Shopify React Native Skia
-- **Database**: SQLite + MMKV cache
+- **Database**: expo-sqlite + MMKV cache
 - **Security**: expo-secure-store (SecureStore API)
 - **Biometrics**: expo-local-authentication
 - **Media Access**: expo-media-library
-- **Image Processing**: expo-image-manipulator, react-native-fast-image
+- **Image Processing**: expo-image, expo-image-manipulator
 - **State Management**: Zustand + React Context
 - **AI Runtime**: TFLite stubs (requires native implementation)
 - **Testing**: Jest, React Native Testing Library
@@ -89,8 +89,8 @@ ZenLens/
 
 ### Prerequisites
 
-- Node.js 18+
-- Expo CLI: `npm install -g expo-cli`
+- Node.js 20+
+- Expo CLI via `npx expo` or the project npm scripts
 - iOS: Xcode 14+ (for iOS build)
 - Android: Android Studio (for Android build)
 
@@ -116,13 +116,13 @@ npm run ios
 npm run android
 ```
 
-### Bare Workflow (For Native TFLite Integration)
+### Native Build Workflow (For TFLite Integration)
 
 If you need native TFLite models:
 
-1. **Eject from Expo**:
+1. **Generate native projects**:
 ```bash
-expo eject
+npm run prebuild
 ```
 
 2. **Install native dependencies**:
@@ -152,8 +152,8 @@ cd ..
   - `mediaId` (FK to media)
   - `caption` (TEXT) - Photo description
   - `tags` (JSON) - Auto-generated tags
-  - `embedding` (BLOB) - 384-dimensional float32
-  - `embeddingQuantized` (BLOB) - Compressed uint8
+  - `embedding` (TEXT) - JSON-packed 384-dimensional float32
+  - `embeddingQuantized` (TEXT) - JSON-packed compressed uint8
   - `dominantColor` (TEXT) - Hex color
   - `colorPalette` (JSON) - Vibrant, muted, etc.
 
