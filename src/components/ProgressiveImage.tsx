@@ -3,14 +3,14 @@
  * Loads thumbnail first, then full resolution image with fade transition
  */
 import React, { useState, useEffect } from 'react';
-import { Image, StyleSheet, View, ImageStyle } from 'react-native';
+import { StyleSheet, View, type ImageStyle, type StyleProp } from 'react-native';
 import Animated, { FadeIn } from 'react-native-reanimated';
-import FastImage, { ImageStyle as FastImageStyle } from 'react-native-fast-image';
+import { Image } from 'expo-image';
 
 interface ProgressiveImageProps {
   uri: string;
   thumbnailUri?: string;
-  style?: ImageStyle | FastImageStyle;
+  style?: StyleProp<ImageStyle>;
   resizeMode?: 'cover' | 'contain' | 'stretch' | 'center';
 }
 
@@ -21,29 +21,21 @@ export default function ProgressiveImage({
   resizeMode = 'cover',
 }: ProgressiveImageProps): JSX.Element {
   const [imageLoaded, setImageLoaded] = useState(false);
-  const [thumbnailLoaded, setThumbnailLoaded] = useState(!thumbnailUri);
-
   useEffect(() => {
-    // Reset loaded state when URI changes
     setImageLoaded(false);
-    if (!thumbnailUri) {
-      setThumbnailLoaded(true);
-    }
-  }, [uri, thumbnailUri]);
+  }, [uri]);
 
   return (
     <View style={[styles.container, style]}>
-      {/* Thumbnail (shown while loading) */}
       {!imageLoaded && thumbnailUri && (
-        <FastImage
-          source={{ uri: thumbnailUri, priority: FastImage.priority.low }}
+        <Image
+          source={thumbnailUri}
           style={[styles.image, style]}
-          resizeMode={resizeMode}
-          onLoad={() => setThumbnailLoaded(true)}
+          contentFit={resizeMode}
+          cachePolicy="memory-disk"
         />
       )}
 
-      {/* Full resolution image (fades in) */}
       <Animated.View
         style={[
           styles.image,
@@ -54,10 +46,11 @@ export default function ProgressiveImage({
         ]}
         entering={FadeIn.duration(300)}
       >
-        <FastImage
-          source={{ uri, priority: FastImage.priority.high }}
+        <Image
+          source={uri}
           style={[styles.image, style]}
-          resizeMode={resizeMode}
+          contentFit={resizeMode}
+          cachePolicy="memory-disk"
           onLoad={() => setImageLoaded(true)}
         />
       </Animated.View>

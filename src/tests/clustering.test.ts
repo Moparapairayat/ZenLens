@@ -1,7 +1,7 @@
 /**
  * Unit tests for clustering algorithms
  */
-import { kMeansClustering, dbscanClustering } from '../../ai/clustering';
+import { kMeansClustering, dbscanClustering } from '../ai/clustering';
 
 describe('Clustering Algorithms', () => {
   describe('kMeansClustering', () => {

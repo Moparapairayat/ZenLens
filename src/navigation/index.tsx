@@ -3,7 +3,7 @@
  * Root navigator with stack, tab, and modal layouts
  */
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -14,7 +14,7 @@ import SearchScreen from '../screens/SearchScreen';
 import SmartAlbumsScreen from '../screens/SmartAlbumsScreen';
 import { useTheme } from '../styles/theme';
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 /**

@@ -1,7 +1,7 @@
 /**
  * Unit tests for database initialization
  */
-import { initializeDB, getDatabase } from '../../db/init';
+import { initializeDB, getDatabase } from '../db/init';
 
 describe('Database', () => {
   describe('initializeDB', () => {

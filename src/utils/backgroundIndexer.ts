@@ -9,8 +9,7 @@ import { runCaptionModel } from '../ai/captionStub';
 import { getFallbackTags } from '../ai/captionStub';
 import { extractDominantColor } from './colorExtract';
 import { cacheThumbnail } from './imageUtils';
-import { addMetadataRecord, getMediaRecord } from '../db/mediaRepository';
-import { getDatabase } from '../db/init';
+import { addMetadataRecord, getMediaRecord, upsertThumbnail } from '../db/mediaRepository';
 
 /**
  * Indexing status tracking
@@ -132,6 +131,9 @@ export async function indexMedia(mediaId: string): Promise<boolean> {
       // Step 1: Generate thumbnail
       console.log(`[Index] Generating thumbnail for ${mediaId}`);
       const thumbnailUri = await cacheThumbnail(media.uri, mediaId, 200);
+      if (thumbnailUri) {
+        await upsertThumbnail(mediaId, thumbnailUri, 200);
+      }
       setIndexingStatus(mediaId, {
         mediaId,
         status: IndexingStatus.IN_PROGRESS,

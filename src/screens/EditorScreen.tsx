@@ -24,11 +24,17 @@ interface EditorScreenProps {
 }
 
 interface EditOp {
-  type: 'crop' | 'rotate' | 'exposure' | 'contrast' | 'saturation' | 'filter';
+  type: 'crop' | 'rotate' | 'exposure' | 'contrast' | 'saturation' | 'filter' | 'export';
   params: Record<string, any>;
 }
 
-const FILTER_PRESETS = [
+type FilterPreviewType = 'original' | 'filter' | 'warm' | 'cool';
+
+const FILTER_PRESETS: Array<{
+  name: string;
+  type: FilterPreviewType;
+  params: Record<string, number>;
+}> = [
   { name: 'Original', type: 'original', params: {} },
   { name: 'Warm', type: 'filter', params: { colorTemp: 1500 } },
   { name: 'Cool', type: 'filter', params: { colorTemp: 8000 } },

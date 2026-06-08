@@ -4,8 +4,7 @@
  */
 import React, { useRef, useState } from 'react';
 import { View, StyleSheet, PanResponder, GestureResponderEvent } from 'react-native';
-import { Canvas, Path } from '@shopify/react-native-skia';
-import { useTheme } from '../styles/theme';
+import { Canvas, Group } from '@shopify/react-native-skia';
 
 interface BrushMaskEditorProps {
   uri: string;
@@ -20,7 +19,6 @@ export default function BrushMaskEditor({
   brushSize = 30,
   opacity = 0.5,
 }: BrushMaskEditorProps): JSX.Element {
-  const theme = useTheme();
   const [isDrawing, setIsDrawing] = useState(false);
   const pathRef = useRef<string>('');
 
@@ -33,12 +31,16 @@ export default function BrushMaskEditor({
       onMoveShouldSetPanResponder: () => true,
       onPanResponderGrant: (evt: GestureResponderEvent) => {
         setIsDrawing(true);
-        const { x, y } = evt.nativeEvent;
+        const { locationX, locationY } = evt.nativeEvent;
+        const x = locationX;
+        const y = locationY;
         pathRef.current = `M${x} ${y}`;
       },
       onPanResponderMove: (evt: GestureResponderEvent) => {
         if (isDrawing) {
-          const { x, y } = evt.nativeEvent as any;
+          const { locationX, locationY } = evt.nativeEvent;
+          const x = locationX;
+          const y = locationY;
           pathRef.current += ` L${x} ${y}`;
         }
       },
@@ -55,8 +57,7 @@ export default function BrushMaskEditor({
       {...panResponder.panHandlers}
     >
       <Canvas style={styles.canvas}>
-        {/* TODO: Render brush strokes */}
-        {/* This is a placeholder for Skia brush rendering */}
+        <Group opacity={opacity} />
       </Canvas>
     </View>
   );

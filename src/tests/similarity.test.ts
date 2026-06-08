@@ -7,7 +7,7 @@ import {
   euclideanDistance,
   l2Norm,
   normalizeEmbedding,
-} from '../../ai/similarity';
+} from '../ai/similarity';
 
 describe('Similarity Functions', () => {
   describe('cosineSimilarity', () => {

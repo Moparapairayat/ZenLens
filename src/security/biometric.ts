@@ -47,7 +47,7 @@ export async function authenticateWithBiometric(reason: string = 'Unlock ZenLens
 
     const result = await LocalAuthentication.authenticateAsync({
       disableDeviceFallback: false,
-      reason,
+      promptMessage: reason,
       fallbackLabel: 'Use PIN instead',
     });
 
