@@ -3,7 +3,7 @@
  * Processes photos: thumbnails, color extraction, embeddings, captions
  * Runs with low priority using background task APIs
  */
-import { MMKV } from 'react-native-mmkv';
+import { createMMKV } from 'react-native-mmkv';
 import { runImageEmbedding, quantizeEmbedding } from '../ai/embeddingStub';
 import { runCaptionModel } from '../ai/captionStub';
 import { getFallbackTags } from '../ai/captionStub';
@@ -28,7 +28,7 @@ interface IndexingTask {
   lastUpdated: number;
 }
 
-const indexingStore = new MMKV();
+const indexingStore = createMMKV({ id: 'zenlens-indexing' });
 const INDEXING_PREFIX = 'indexing_';
 const INDEXING_PAUSE_KEY = 'indexing_paused';
 
@@ -263,9 +263,9 @@ export function getIndexingProgress(): { total: number; completed: number; faile
  */
 export function clearIndexingStatus(): void {
   try {
-    indexingStore.getAllKeys().forEach((key) => {
+    indexingStore.getAllKeys().forEach((key: string) => {
       if (key.startsWith(INDEXING_PREFIX)) {
-        indexingStore.delete(key);
+        indexingStore.remove(key);
       }
     });
     console.log('Cleared indexing status cache');

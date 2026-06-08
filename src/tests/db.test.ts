@@ -1,6 +1,13 @@
 /**
  * Unit tests for database initialization
  */
+jest.mock('expo-sqlite', () => ({
+  openDatabaseAsync: jest.fn(async () => ({
+    execAsync: jest.fn(async () => undefined),
+    closeAsync: jest.fn(async () => undefined),
+  })),
+}));
+
 import { initializeDB, getDatabase } from '../db/init';
 
 describe('Database', () => {
@@ -11,7 +18,7 @@ describe('Database', () => {
 
     it('should create database tables', async () => {
       await initializeDB();
-      const db = getDatabase();
+      const db = await getDatabase();
       expect(db).toBeDefined();
     });
   });

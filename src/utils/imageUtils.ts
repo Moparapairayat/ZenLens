@@ -2,9 +2,19 @@
  * Image Utilities
  * Image loading, caching, and manipulation helpers
  */
-import FileSystem from 'expo-file-system';
+import * as FileSystem from 'expo-file-system/legacy';
 import ImageManipulator from 'expo-image-manipulator';
 import { Platform } from 'react-native';
+
+function getFileSize(info: FileSystem.FileInfo): number {
+  return info.exists && 'size' in info && typeof info.size === 'number' ? info.size : 0;
+}
+
+function getModificationTime(info: FileSystem.FileInfo): number {
+  return info.exists && 'modificationTime' in info && typeof info.modificationTime === 'number'
+    ? info.modificationTime
+    : 0;
+}
 
 /**
  * Generate thumbnail URI from original image
@@ -94,9 +104,7 @@ export async function getCacheSize(): Promise<number> {
     for (const file of files) {
       const filePath = `${cacheDir}${file}`;
       const fileInfo = await FileSystem.getInfoAsync(filePath);
-      if (fileInfo.size) {
-        totalSize += fileInfo.size;
-      }
+      totalSize += getFileSize(fileInfo);
     }
 
     return totalSize;
@@ -127,7 +135,7 @@ export async function clearOldThumbnails(maxCacheSize: number = 50 * 1024 * 1024
     const filesWithTime = await Promise.all(
       thumbnailFiles.map(async (f) => {
         const info = await FileSystem.getInfoAsync(f.path);
-        return { ...f, time: info.modificationTime || 0 };
+        return { ...f, time: getModificationTime(info) };
       })
     );
 
@@ -141,7 +149,7 @@ export async function clearOldThumbnails(maxCacheSize: number = 50 * 1024 * 1024
       try {
         const info = await FileSystem.getInfoAsync(file.path);
         await FileSystem.deleteAsync(file.path);
-        currentSize -= info.size || 0;
+        currentSize -= getFileSize(info);
         console.log(`Deleted cached file: ${file.name}`);
       } catch (error) {
         console.warn(`Failed to delete cached file ${file.name}:`, error);

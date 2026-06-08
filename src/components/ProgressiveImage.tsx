@@ -5,7 +5,7 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, type ImageStyle, type StyleProp } from 'react-native';
 import Animated, { FadeIn } from 'react-native-reanimated';
-import { Image } from 'expo-image';
+import { Image, type ImageContentFit } from 'expo-image';
 
 interface ProgressiveImageProps {
   uri: string;
@@ -21,6 +21,8 @@ export default function ProgressiveImage({
   resizeMode = 'cover',
 }: ProgressiveImageProps): JSX.Element {
   const [imageLoaded, setImageLoaded] = useState(false);
+  const contentFit: ImageContentFit =
+    resizeMode === 'stretch' ? 'fill' : resizeMode === 'center' ? 'contain' : resizeMode;
   useEffect(() => {
     setImageLoaded(false);
   }, [uri]);
@@ -31,7 +33,7 @@ export default function ProgressiveImage({
         <Image
           source={thumbnailUri}
           style={[styles.image, style]}
-          contentFit={resizeMode}
+          contentFit={contentFit}
           cachePolicy="memory-disk"
         />
       )}
@@ -49,7 +51,7 @@ export default function ProgressiveImage({
         <Image
           source={uri}
           style={[styles.image, style]}
-          contentFit={resizeMode}
+          contentFit={contentFit}
           cachePolicy="memory-disk"
           onLoad={() => setImageLoaded(true)}
         />

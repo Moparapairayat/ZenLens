@@ -38,7 +38,7 @@ export default function ProtectedWrapper({ children }: ProtectedWrapperProps): J
   const [biometricEnabled, setBiometricEnabled] = useState(false);
 
   const appState = useRef(AppState.currentState);
-  const inactivityTimer = useRef<NodeJS.Timeout>();
+  const inactivityTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   /**
    * Initialize PIN and biometric settings
@@ -85,6 +85,9 @@ export default function ProtectedWrapper({ children }: ProtectedWrapperProps): J
     } else {
       // App has gone to background
       // Start inactivity timer
+      if (inactivityTimer.current) {
+        clearTimeout(inactivityTimer.current);
+      }
       inactivityTimer.current = setTimeout(() => {
         if (pinConfigured) {
           lockApp();
@@ -247,7 +250,7 @@ export default function ProtectedWrapper({ children }: ProtectedWrapperProps): J
 
 const styles = StyleSheet.create({
   overlay: {
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFill,
     justifyContent: 'center',
     alignItems: 'center',
     zIndex: 999,

@@ -1,8 +1,7 @@
+
+> zenlens@0.1.0 web
+> expo start --web --port 8081
+
 Starting project at D:\ZenLens
 Starting Metro Bundler
-Waiting on http://localhost:8081
-Logs for your project will appear below.
-Web Bundled 17435ms (D:\ZenLens\node_modules\expo\AppEntry.js)
-Web Bundled 62ms (D:\ZenLens\node_modules\expo\AppEntry.js)
-Web Bundled 100ms (D:\ZenLens\node_modules\expo\AppEntry.js)
-Web Bundled 72ms (D:\ZenLens\node_modules\expo\AppEntry.js)
+
