@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Offline AI-powered photo gallery with cinematic UI/UX",
   "type": "module",
-  "main": "expo-router/entry",
+  "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
