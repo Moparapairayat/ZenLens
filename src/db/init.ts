@@ -1,27 +1,13 @@
 /**
- * Database initialization and schema
- * SQLite storage for media, metadata, albums, and edit stacks
+ * Database initialization and schema.
+ * Uses Expo SQLite so the managed workflow works across native targets and web.
  */
-import Database from 'react-native-sqlite-storage';
-import { Platform } from 'react-native';
+import * as SQLite from 'expo-sqlite';
+import type { SQLiteDatabase } from 'expo-sqlite';
 
-// Enable debug for development
-Database.DEBUG(true);
+let databasePromise: Promise<SQLiteDatabase> | null = null;
 
-const db = Database.openDatabase(
-  {
-    name: 'zenlens.db',
-    location: 'default',
-  },
-  () => console.log('Database opened successfully'),
-  (error) => console.error('Database open failed:', error)
-);
-
-/**
- * SQL Schema Definitions
- */
-const SCHEMA = {
-  // Media library - original photos
+export const SCHEMA = {
   media: `
     CREATE TABLE IF NOT EXISTS media (
       id TEXT PRIMARY KEY,
@@ -37,34 +23,31 @@ const SCHEMA = {
       isVideo INTEGER DEFAULT 0,
       isDeleted INTEGER DEFAULT 0,
       deletedAt INTEGER,
-      albumId TEXT,
-      FOREIGN KEY(albumId) REFERENCES albums(id)
+      albumId TEXT
     );
-    CREATE INDEX idx_media_createdAt ON media(createdAt DESC);
-    CREATE INDEX idx_media_albumId ON media(albumId);
+    CREATE INDEX IF NOT EXISTS idx_media_createdAt ON media(createdAt DESC);
+    CREATE INDEX IF NOT EXISTS idx_media_albumId ON media(albumId);
   `,
 
-  // Metadata - AI-generated data and user annotations
   metadata: `
     CREATE TABLE IF NOT EXISTS metadata (
       id TEXT PRIMARY KEY,
       mediaId TEXT NOT NULL UNIQUE,
       caption TEXT,
       tags TEXT,
-      embedding BLOB,
-      embeddingQuantized BLOB,
+      embedding TEXT,
+      embeddingQuantized TEXT,
       dominantColor TEXT,
-      faceEmbeddings BLOB,
+      faceEmbeddings TEXT,
       colorPalette TEXT,
       exifData TEXT,
       createdAt INTEGER NOT NULL,
       updatedAt INTEGER NOT NULL,
       FOREIGN KEY(mediaId) REFERENCES media(id) ON DELETE CASCADE
     );
-    CREATE INDEX idx_metadata_mediaId ON metadata(mediaId);
+    CREATE INDEX IF NOT EXISTS idx_metadata_mediaId ON metadata(mediaId);
   `,
 
-  // Thumbnails - cached small images
   thumbnails: `
     CREATE TABLE IF NOT EXISTS thumbnails (
       id TEXT PRIMARY KEY,
@@ -74,10 +57,9 @@ const SCHEMA = {
       createdAt INTEGER NOT NULL,
       FOREIGN KEY(mediaId) REFERENCES media(id) ON DELETE CASCADE
     );
-    CREATE INDEX idx_thumbnails_mediaId ON thumbnails(mediaId);
+    CREATE INDEX IF NOT EXISTS idx_thumbnails_mediaId ON thumbnails(mediaId);
   `,
 
-  // Albums - user-created or smart albums
   albums: `
     CREATE TABLE IF NOT EXISTS albums (
       id TEXT PRIMARY KEY,
@@ -89,10 +71,9 @@ const SCHEMA = {
       createdAt INTEGER NOT NULL,
       updatedAt INTEGER NOT NULL
     );
-    CREATE INDEX idx_albums_isSmartAlbum ON albums(isSmartAlbum);
+    CREATE INDEX IF NOT EXISTS idx_albums_isSmartAlbum ON albums(isSmartAlbum);
   `,
 
-  // Edit operations - non-destructive stack
   edits: `
     CREATE TABLE IF NOT EXISTS edits (
       id TEXT PRIMARY KEY,
@@ -105,11 +86,11 @@ const SCHEMA = {
       createdAt INTEGER NOT NULL,
       FOREIGN KEY(mediaId) REFERENCES media(id) ON DELETE CASCADE
     );
-    CREATE INDEX idx_edits_mediaId ON edits(mediaId);
-    CREATE UNIQUE INDEX idx_edits_mediaId_operationIndex ON edits(mediaId, operationIndex);
+    CREATE INDEX IF NOT EXISTS idx_edits_mediaId ON edits(mediaId);
+    CREATE UNIQUE INDEX IF NOT EXISTS idx_edits_mediaId_operationIndex
+      ON edits(mediaId, operationIndex);
   `,
 
-  // Search index - for text-based fallback search
   searchIndex: `
     CREATE TABLE IF NOT EXISTS searchIndex (
       id TEXT PRIMARY KEY,
@@ -118,10 +99,9 @@ const SCHEMA = {
       createdAt INTEGER NOT NULL,
       FOREIGN KEY(mediaId) REFERENCES media(id) ON DELETE CASCADE
     );
-    CREATE INDEX idx_searchIndex_mediaId ON searchIndex(mediaId);
+    CREATE INDEX IF NOT EXISTS idx_searchIndex_mediaId ON searchIndex(mediaId);
   `,
 
-  // Indexing status - track background indexing progress
   indexingStatus: `
     CREATE TABLE IF NOT EXISTS indexingStatus (
       id TEXT PRIMARY KEY,
@@ -131,67 +111,44 @@ const SCHEMA = {
       lastUpdated INTEGER NOT NULL,
       FOREIGN KEY(mediaId) REFERENCES media(id) ON DELETE CASCADE
     );
-    CREATE INDEX idx_indexingStatus_status ON indexingStatus(status);
+    CREATE INDEX IF NOT EXISTS idx_indexingStatus_status ON indexingStatus(status);
   `,
 };
 
 /**
- * Execute SQL in transaction
+ * Returns the shared database connection, opening it lazily.
  */
-function executeSql(sql: string): Promise<void> {
-  return new Promise((resolve, reject) => {
-    db.transaction((tx) => {
-      tx.executeSql(
-        sql,
-        [],
-        () => resolve(),
-        (_, error) => {
-          reject(error);
-          return false;
-        }
-      );
-    });
-  });
+export function getDatabase(): Promise<SQLiteDatabase> {
+  databasePromise ??= SQLite.openDatabaseAsync('zenlens.db');
+  return databasePromise;
 }
 
 /**
- * Initialize database schema
+ * Initialize database schema and pragmas.
  */
 export async function initializeDB(): Promise<void> {
-  try {
-    // Execute all schema creation statements
-    for (const [name, sql] of Object.entries(SCHEMA)) {
-      try {
-        await executeSql(sql);
-        console.log(`Schema ${name} initialized`);
-      } catch (error) {
-        console.error(`Failed to initialize ${name} schema:`, error);
-        // Continue with other schemas
-      }
-    }
+  const db = await getDatabase();
+  await db.execAsync('PRAGMA foreign_keys = ON;');
 
-    console.log('Database initialization complete');
-  } catch (error) {
-    console.error('Database initialization failed:', error);
-    throw error;
+  for (const [name, sql] of Object.entries(SCHEMA)) {
+    try {
+      await db.execAsync(sql);
+    } catch (error) {
+      console.error(`Failed to initialize ${name} schema:`, error);
+      throw error;
+    }
   }
 }
 
 /**
- * Get database instance
- */
-export function getDatabase(): any {
-  return db;
-}
-
-/**
- * Close database connection
+ * Close database connection.
  */
 export async function closeDatabase(): Promise<void> {
-  return new Promise((resolve, reject) => {
-    db.close(() => {
-      console.log('Database closed');
-      resolve();
-    }, reject);
-  });
+  if (!databasePromise) {
+    return;
+  }
+
+  const db = await databasePromise;
+  await db.closeAsync();
+  databasePromise = null;
 }
