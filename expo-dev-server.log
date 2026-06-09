@@ -9,3 +9,630 @@ Android Bundled 12668ms node_modules\expo\AppEntry.js (1886 modules)
  LOG  Generating new database encryption key
 Android Bundled 73ms node_modules\expo\AppEntry.js (1 module)
 Android Bundled 58ms node_modules\expo\AppEntry.js (1 module)
+ LOG  [Index] Generating thumbnail for 103240
+ LOG  [Index] Generating thumbnail for 103242
+ LOG  [Index] Generating thumbnail for 103239
+ LOG  [Index] Generating thumbnail for 103241
+ LOG  [Index] Generating thumbnail for 102854
+ LOG  [Index] Generating thumbnail for 102222
+ LOG  [Index] Generating thumbnail for 102224
+ LOG  [Index] Generating thumbnail for 103012
+ LOG  [Index] Generating thumbnail for 102230
+ LOG  [Index] Generating thumbnail for 102471
+ LOG  [Index] Generating thumbnail for 102855
+ LOG  [Index] Generating thumbnail for 103179
+ LOG  [Index] Generating thumbnail for 102920
+ LOG  [Index] Generating thumbnail for 102853
+ LOG  [Index] Generating thumbnail for 103234
+ LOG  [Index] Generating thumbnail for 102852
+ LOG  [Index] Generating thumbnail for 103000
+ LOG  [Index] Generating thumbnail for 102561
+ LOG  [Index] Generating thumbnail for 102801
+ LOG  [Index] Generating thumbnail for 102763
+ LOG  [Index] Generating thumbnail for 102472
+ LOG  [Index] Generating thumbnail for 102921
+ LOG  [Index] Generating thumbnail for 102532
+ LOG  [Index] Generating thumbnail for 103011
+ LOG  [Index] Generating thumbnail for 102776
+ LOG  [Index] Generating thumbnail for 103232
+ LOG  [Index] Generating thumbnail for 103236
+ LOG  [Index] Generating thumbnail for 103121
+ LOG  [Index] Generating thumbnail for 103237
+ LOG  [Index] Generating thumbnail for 102923
+ LOG  [Index] Generating thumbnail for 102997
+ LOG  [Index] Generating thumbnail for 102998
+ LOG  [Index] Generating thumbnail for 102919
+ LOG  [Index] Generating thumbnail for 103231
+ LOG  [Index] Generating thumbnail for 103144
+ LOG  [Index] Generating thumbnail for 102784
+ LOG  [Index] Generating thumbnail for 103238
+ LOG  [Index] Generating thumbnail for 102271
+ LOG  [Index] Generating thumbnail for 103235
+ LOG  [Index] Generating thumbnail for 103233
+ LOG  [Index] Generating thumbnail for 101590
+ LOG  [Index] Generating thumbnail for 100789
+ LOG  [Index] Generating thumbnail for 101587
+ LOG  [Index] Generating thumbnail for 102159
+ LOG  [Index] Generating thumbnail for 102219
+ LOG  [Index] Generating thumbnail for 101451
+ LOG  [Index] Generating thumbnail for 102192
+ LOG  [Index] Generating thumbnail for 101589
+ LOG  [Index] Generating thumbnail for 101615
+ LOG  [Index] Generating thumbnail for 101613
+ ERROR  Failed to generate thumbnail: [TypeError: Cannot read property 'manipulateAsync' of undefined]
+ LOG  [Index] Extracting color for 103240
+ LOG  [Index] Generating embedding for 103240
+ LOG  [STUB] Generated image embedding for file:///storage/emulated/0/Download/FB_IMG_1732600772646.jpg
+ LOG  [Index] Generating caption for 103240
+ LOG  [STUB] Generated caption for file:///storage/emulated/0/Download/FB_IMG_1732600772646.jpg: "Abstract composition with geometric shapes"
+ LOG  [Index] Saving metadata for 103240
+ ERROR  Failed to generate thumbnail: [TypeError: Cannot read property 'manipulateAsync' of undefined]
+ LOG  [Index] Extracting color for 103242
+ LOG  [Index] Generating embedding for 103242
+ LOG  [STUB] Generated image embedding for file:///storage/emulated/0/Download/FB_IMG_1731758141001.jpg
+ LOG  [Index] Generating caption for 103242
+ LOG  [STUB] Generated caption for file:///storage/emulated/0/Download/FB_IMG_1731758141001.jpg: "Portrait of a person in natural lighting"
+ LOG  [Index] Saving metadata for 103242
+ ERROR  Failed to generate thumbnail: [TypeError: Cannot read property 'manipulateAsync' of undefined]
+ LOG  [Index] Extracting color for 103239
+ LOG  [Index] Generating embedding for 103239
+ LOG  [STUB] Generated image embedding for file:///storage/emulated/0/Download/FB_IMG_1733764417302.jpg
+ LOG  [Index] Generating caption for 103239
+ LOG  [STUB] Generated caption for file:///storage/emulated/0/Download/FB_IMG_1733764417302.jpg: "A vibrant outdoor landscape at sunset"
+ LOG  [Index] Saving metadata for 103239
+ ERROR  Failed to generate thumbnail: [TypeError: Cannot read property 'manipulateAsync' of undefined]
+ LOG  [Index] Extracting color for 103241
+ LOG  [Index] Generating embedding for 103241
+ LOG  [STUB] Generated image embedding for file:///storage/emulated/0/Download/FB_IMG_1731758143994.jpg
+ LOG  [Index] Generating caption for 103241
+ LOG  [STUB] Generated caption for file:///storage/emulated/0/Download/FB_IMG_1731758143994.jpg: "Close-up nature photography with flowers"
+ LOG  [Index] Saving metadata for 103241
+ ERROR  Failed to generate thumbnail: [TypeError: Cannot read property 'manipulateAsync' of undefined]
+ LOG  [Index] Extracting color for 102854
+ LOG  [Index] Generating embedding for 102854
+ LOG  [STUB] Generated image embedding for file:///storage/emulated/0/DCIM/Facebook/FB_IMG_1776781321405.jpg
+ LOG  [Index] Generating caption for 102854
+ LOG  [STUB] Generated caption for file:///storage/emulated/0/DCIM/Facebook/FB_IMG_1776781321405.jpg: "Close-up nature photography with flowers"
+ LOG  [Index] Saving metadata for 102854
+ ERROR  Failed to generate thumbnail: [TypeError: Cannot read property 'manipulateAsync' of undefined]
+ LOG  [Index] Extracting color for 102222
+ LOG  [Index] Generating embedding for 102222
+ LOG  [STUB] Generated image embedding for file:///storage/emulated/0/DCIM/Facebook/FB_IMG_1776484700162.jpg
+ LOG  [Index] Generating caption for 102222
+ LOG  [STUB] Generated caption for file:///storage/emulated/0/DCIM/Facebook/FB_IMG_1776484700162.jpg: "Urban architecture and city scenes"
+ LOG  [Index] Saving metadata for 102222
+ ERROR  Failed to generate thumbnail: [TypeError: Cannot read property 'manipulateAsync' of undefined]
+ LOG  [Index] Extracting color for 102224
+ LOG  [Index] Generating embedding for 102224
+ LOG  [STUB] Generated image embedding for file:///storage/emulated/0/DCIM/Facebook/FB_IMG_1776485318448.jpg
+ LOG  [Index] Generating caption for 102224
+ LOG  [STUB] Generated caption for file:///storage/emulated/0/DCIM/Facebook/FB_IMG_1776485318448.jpg: "A vibrant outdoor landscape at sunset"
+ LOG  [Index] Saving metadata for 102224
+ ERROR  Failed to generate thumbnail: [TypeError: Cannot read property 'manipulateAsync' of undefined]
+ LOG  [Index] Extracting color for 103012
+ LOG  [Index] Generating embedding for 103012
+ LOG  [STUB] Generated image embedding for file:///storage/emulated/0/DCIM/Facebook/FB_IMG_1776855902379.jpg
+ LOG  [Index] Generating caption for 103012
+ LOG  [STUB] Generated caption for file:///storage/emulated/0/DCIM/Facebook/FB_IMG_1776855902379.jpg: "Urban architecture and city scenes"
+ LOG  [Index] Saving metadata for 103012
+ ERROR  Failed to generate thumbnail: [TypeError: Cannot read property 'manipulateAsync' of undefined]
+ LOG  [Index] Extracting color for 102230
+ LOG  [Index] Generating embedding for 102230
+ LOG  [STUB] Generated image embedding for file:///storage/emulated/0/DCIM/Facebook/FB_IMG_1776493430830.jpg
+ LOG  [Index] Generating caption for 102230
+ LOG  [STUB] Generated caption for file:///storage/emulated/0/DCIM/Facebook/FB_IMG_1776493430830.jpg: "Abstract composition with geometric shapes"
+ LOG  [Index] Saving metadata for 102230
+ ERROR  Failed to generate thumbnail: [TypeError: Cannot read property 'manipulateAsync' of undefined]
+ LOG  [Index] Extracting color for 102471
+ LOG  [Index] Generating embedding for 102471
+ LOG  [STUB] Generated image embedding for file:///storage/emulated/0/DCIM/Facebook/FB_IMG_1776579089568.jpg
+ LOG  [Index] Generating caption for 102471
+ LOG  [STUB] Generated caption for file:///storage/emulated/0/DCIM/Facebook/FB_IMG_1776579089568.jpg: "Still life arrangement of objects"
+ LOG  [Index] Saving metadata for 102471
+ ERROR  Failed to generate thumbnail: [TypeError: Cannot read property 'manipulateAsync' of undefined]
+ LOG  [Index] Extracting color for 102855
+ LOG  [Index] Generating embedding for 102855
+ LOG  [STUB] Generated image embedding for file:///storage/emulated/0/DCIM/Facebook/FB_IMG_1776781340828.jpg
+ LOG  [Index] Generating caption for 102855
+ LOG  [STUB] Generated caption for file:///storage/emulated/0/DCIM/Facebook/FB_IMG_1776781340828.jpg: "Still life arrangement of objects"
+ LOG  [Index] Saving metadata for 102855
+ ERROR  Failed to generate thumbnail: [TypeError: Cannot read property 'manipulateAsync' of undefined]
+ LOG  [Index] Extracting color for 103179
+ LOG  [Index] Generating embedding for 103179
+ LOG  [STUB] Generated image embedding for file:///storage/emulated/0/DCIM/Facebook/FB_IMG_1776928598994.jpg
+ LOG  [Index] Generating caption for 103179
+ LOG  [STUB] Generated caption for file:///storage/emulated/0/DCIM/Facebook/FB_IMG_1776928598994.jpg: "Close-up nature photography with flowers"
+ LOG  [Index] Saving metadata for 103179
+ ERROR  Failed to generate thumbnail: [TypeError: Cannot read property 'manipulateAsync' of undefined]
+ LOG  [Index] Extracting color for 102920
+ LOG  [Index] Generating embedding for 102920
+ LOG  [STUB] Generated image embedding for file:///storage/emulated/0/Download/_on_board_my_opswat_portal_orientation_guide.png
+ LOG  [Index] Generating caption for 102920
+ LOG  [STUB] Generated caption for file:///storage/emulated/0/Download/_on_board_my_opswat_portal_orientation_guide.png: "Aerial view of terrain and landscapes"
+ LOG  [Index] Saving metadata for 102920
+ ERROR  Failed to generate thumbnail: [TypeError: Cannot read property 'manipulateAsync' of undefined]
+ LOG  [Index] Extracting color for 102853
+ LOG  [Index] Generating embedding for 102853
+ LOG  [STUB] Generated image embedding for file:///storage/emulated/0/Download/Generated Tweet - Nuelink.png
+ LOG  [Index] Generating caption for 102853
+ LOG  [STUB] Generated caption for file:///storage/emulated/0/Download/Generated Tweet - Nuelink.png: "Still life arrangement of objects"
+ LOG  [Index] Saving metadata for 102853
+ ERROR  Failed to generate thumbnail: [TypeError: Cannot read property 'manipulateAsync' of undefined]
+ LOG  [Index] Extracting color for 103234
+ LOG  [Index] Generating embedding for 103234
+ LOG  [STUB] Generated image embedding for file:///storage/emulated/0/Download/Screenshot_2025_0322_082746.gif
+ LOG  [Index] Generating caption for 103234
+ LOG  [STUB] Generated caption for file:///storage/emulated/0/Download/Screenshot_2025_0322_082746.gif: "A vibrant outdoor landscape at sunset"
+ LOG  [Index] Saving metadata for 103234
+ ERROR  Failed to generate thumbnail: [TypeError: Cannot read property 'manipulateAsync' of undefined]
+ LOG  [Index] Extracting color for 102852
+ LOG  [Index] Generating embedding for 102852
+ LOG  [STUB] Generated image embedding for file:///storage/emulated/0/Download/4204-2.jpg
+ LOG  [Index] Generating caption for 102852
+ LOG  [STUB] Generated caption for file:///storage/emulated/0/Download/4204-2.jpg: "Close-up nature photography with flowers"
+ LOG  [Index] Saving metadata for 102852
+ ERROR  Failed to generate thumbnail: [TypeError: Cannot read property 'manipulateAsync' of undefined]
+ LOG  [Index] Extracting color for 103000
+ LOG  [Index] Generating embedding for 103000
+ LOG  [STUB] Generated image embedding for file:///storage/emulated/0/DCIM/Facebook/FB_IMG_1776833184800.jpg
+ LOG  [Index] Generating caption for 103000
+ LOG  [STUB] Generated caption for file:///storage/emulated/0/DCIM/Facebook/FB_IMG_1776833184800.jpg: "Wildlife animal photography"
+ LOG  [Index] Saving metadata for 103000
+ ERROR  Failed to generate thumbnail: [TypeError: Cannot read property 'manipulateAsync' of undefined]
+ LOG  [Index] Extracting color for 102561
+ LOG  [Index] Generating embedding for 102561
+ LOG  [STUB] Generated image embedding for file:///storage/emulated/0/DCIM/Facebook/FB_IMG_1776651505736.jpg
+ LOG  [Index] Generating caption for 102561
+ LOG  [STUB] Generated caption for file:///storage/emulated/0/DCIM/Facebook/FB_IMG_1776651505736.jpg: "Portrait of a person in natural lighting"
+ LOG  [Index] Saving metadata for 102561
+ ERROR  Failed to generate thumbnail: [TypeError: Cannot read property 'manipulateAsync' of undefined]
+ LOG  [Index] Extracting color for 102801
+ LOG  [Index] Generating embedding for 102801
+ LOG  [STUB] Generated image embedding for file:///storage/emulated/0/Download/zeoob.com_n3hfzu4cse_photo.png
+ LOG  [Index] Generating caption for 102801
+ LOG  [STUB] Generated caption for file:///storage/emulated/0/Download/zeoob.com_n3hfzu4cse_photo.png: "Wildlife animal photography"
+ LOG  [Index] Saving metadata for 102801
+ ERROR  Failed to generate thumbnail: [TypeError: Cannot read property 'manipulateAsync' of undefined]
+ LOG  [Index] Extracting color for 102763
+ LOG  [Index] Generating embedding for 102763
+ LOG  [STUB] Generated image embedding for file:///storage/emulated/0/DCIM/Facebook/FB_IMG_1776698657913.jpg
+ LOG  [Index] Generating caption for 102763
+ LOG  [STUB] Generated caption for file:///storage/emulated/0/DCIM/Facebook/FB_IMG_1776698657913.jpg: "Portrait of a person in natural lighting"
+ LOG  [Index] Saving metadata for 102763
+ ERROR  Failed to generate thumbnail: [TypeError: Cannot read property 'manipulateAsync' of undefined]
+ LOG  [Index] Extracting color for 102472
+ LOG  [Index] Generating embedding for 102472
+ LOG  [STUB] Generated image embedding for file:///storage/emulated/0/DCIM/Facebook/FB_IMG_1776579695034.jpg
+ LOG  [Index] Generating caption for 102472
+ LOG  [STUB] Generated caption for file:///storage/emulated/0/DCIM/Facebook/FB_IMG_1776579695034.jpg: "Urban architecture and city scenes"
+ LOG  [Index] Saving metadata for 102472
+ ERROR  Failed to generate thumbnail: [TypeError: Cannot read property 'manipulateAsync' of undefined]
+ LOG  [Index] Extracting color for 102921
+ LOG  [Index] Generating embedding for 102921
+ LOG  [STUB] Generated image embedding for file:///storage/emulated/0/DCIM/Facebook/FB_IMG_1776824088144.jpg
+ LOG  [Index] Generating caption for 102921
+ LOG  [STUB] Generated caption for file:///storage/emulated/0/DCIM/Facebook/FB_IMG_1776824088144.jpg: "Close-up nature photography with flowers"
+ LOG  [Index] Saving metadata for 102921
+ ERROR  Failed to generate thumbnail: [TypeError: Cannot read property 'manipulateAsync' of undefined]
+ LOG  [Index] Extracting color for 102532
+ LOG  [Index] Generating embedding for 102532
+ LOG  [STUB] Generated image embedding for file:///storage/emulated/0/Download/eefe22dd-5898-40ba-ace5-aaa1b9c4b8eb.png
+ LOG  [Index] Generating caption for 102532
+ LOG  [STUB] Generated caption for file:///storage/emulated/0/Download/eefe22dd-5898-40ba-ace5-aaa1b9c4b8eb.png: "A vibrant outdoor landscape at sunset"
+ LOG  [Index] Saving metadata for 102532
+ ERROR  Failed to generate thumbnail: [TypeError: Cannot read property 'manipulateAsync' of undefined]
+ LOG  [Index] Extracting color for 103011
+ LOG  [Index] Generating embedding for 103011
+ LOG  [STUB] Generated image embedding for file:///storage/emulated/0/DCIM/Facebook/FB_IMG_1776853779058.jpg
+ LOG  [Index] Generating caption for 103011
+ LOG  [STUB] Generated caption for file:///storage/emulated/0/DCIM/Facebook/FB_IMG_1776853779058.jpg: "Aerial view of terrain and landscapes"
+ LOG  [Index] Saving metadata for 103011
+ ERROR  Failed to generate thumbnail: [TypeError: Cannot read property 'manipulateAsync' of undefined]
+ LOG  [Index] Extracting color for 102776
+ LOG  [Index] Generating embedding for 102776
+ LOG  [STUB] Generated image embedding for file:///storage/emulated/0/DCIM/Facebook/FB_IMG_1776733000412.jpg
+ LOG  [Index] Generating caption for 102776
+ LOG  [STUB] Generated caption for file:///storage/emulated/0/DCIM/Facebook/FB_IMG_1776733000412.jpg: "Aerial view of terrain and landscapes"
+ LOG  [Index] Saving metadata for 102776
+ ERROR  Failed to generate thumbnail: [TypeError: Cannot read property 'manipulateAsync' of undefined]
+ LOG  [Index] Extracting color for 103232
+ LOG  [Index] Generating embedding for 103232
+ LOG  [STUB] Generated image embedding for file:///storage/emulated/0/Download/FB_IMG_1763177142053.jpg
+ LOG  [Index] Generating caption for 103232
+ LOG  [STUB] Generated caption for file:///storage/emulated/0/Download/FB_IMG_1763177142053.jpg: "Portrait of a person in natural lighting"
+ LOG  [Index] Saving metadata for 103232
+ ERROR  Failed to generate thumbnail: [TypeError: Cannot read property 'manipulateAsync' of undefined]
+ LOG  [Index] Extracting color for 103236
+ LOG  [Index] Generating embedding for 103236
+ LOG  [STUB] Generated image embedding for file:///storage/emulated/0/Download/FB_IMG_1739875846653.jpg
+ LOG  [Index] Generating caption for 103236
+ LOG  [STUB] Generated caption for file:///storage/emulated/0/Download/FB_IMG_1739875846653.jpg: "A vibrant outdoor landscape at sunset"
+ LOG  [Index] Saving metadata for 103236
+ ERROR  Failed to generate thumbnail: [TypeError: Cannot read property 'manipulateAsync' of undefined]
+ LOG  [Index] Extracting color for 103121
+ LOG  [Index] Generating embedding for 103121
+ LOG  [STUB] Generated image embedding for file:///storage/emulated/0/DCIM/Facebook/FB_IMG_1776873333347.jpg
+ LOG  [Index] Generating caption for 103121
+ LOG  [STUB] Generated caption for file:///storage/emulated/0/DCIM/Facebook/FB_IMG_1776873333347.jpg: "Still life arrangement of objects"
+ LOG  [Index] Saving metadata for 103121
+ ERROR  Failed to generate thumbnail: [TypeError: Cannot read property 'manipulateAsync' of undefined]
+ LOG  [Index] Extracting color for 103237
+ LOG  [Index] Generating embedding for 103237
+ LOG  [STUB] Generated image embedding for file:///storage/emulated/0/Download/FB_IMG_1738062504636.jpg
+ LOG  [Index] Generating caption for 103237
+ LOG  [STUB] Generated caption for file:///storage/emulated/0/Download/FB_IMG_1738062504636.jpg: "Abstract composition with geometric shapes"
+ LOG  [Index] Saving metadata for 103237
+ ERROR  Failed to generate thumbnail: [TypeError: Cannot read property 'manipulateAsync' of undefined]
+ LOG  [Index] Extracting color for 102923
+ LOG  [Index] Generating embedding for 102923
+ LOG  [STUB] Generated image embedding for file:///storage/emulated/0/DCIM/Facebook/FB_IMG_1776827148707.jpg
+ LOG  [Index] Generating caption for 102923
+ LOG  [STUB] Generated caption for file:///storage/emulated/0/DCIM/Facebook/FB_IMG_1776827148707.jpg: "Aerial view of terrain and landscapes"
+ LOG  [Index] Saving metadata for 102923
+ ERROR  Failed to generate thumbnail: [TypeError: Cannot read property 'manipulateAsync' of undefined]
+ LOG  [Index] Extracting color for 102997
+ LOG  [Index] Generating embedding for 102997
+ LOG  [STUB] Generated image embedding for file:///storage/emulated/0/Download/1ebff1e68ed0e50a8116d9ba3bf8641d6ede6a2a.png
+ LOG  [Index] Generating caption for 102997
+ LOG  [STUB] Generated caption for file:///storage/emulated/0/Download/1ebff1e68ed0e50a8116d9ba3bf8641d6ede6a2a.png: "Urban architecture and city scenes"
+ LOG  [Index] Saving metadata for 102997
+ ERROR  Failed to generate thumbnail: [TypeError: Cannot read property 'manipulateAsync' of undefined]
+ LOG  [Index] Extracting color for 102998
+ LOG  [Index] Generating embedding for 102998
+ LOG  [STUB] Generated image embedding for file:///storage/emulated/0/Download/images.jpeg
+ LOG  [Index] Generating caption for 102998
+ LOG  [STUB] Generated caption for file:///storage/emulated/0/Download/images.jpeg: "A vibrant outdoor landscape at sunset"
+ LOG  [Index] Saving metadata for 102998
+ ERROR  Failed to generate thumbnail: [TypeError: Cannot read property 'manipulateAsync' of undefined]
+ LOG  [Index] Extracting color for 102919
+ LOG  [Index] Generating embedding for 102919
+ LOG  [STUB] Generated image embedding for file:///storage/emulated/0/Download/introduction_to_cip.png
+ LOG  [Index] Generating caption for 102919
+ LOG  [STUB] Generated caption for file:///storage/emulated/0/Download/introduction_to_cip.png: "A vibrant outdoor landscape at sunset"
+ LOG  [Index] Saving metadata for 102919
+ ERROR  Failed to generate thumbnail: [TypeError: Cannot read property 'manipulateAsync' of undefined]
+ LOG  [Index] Extracting color for 103231
+ LOG  [Index] Generating embedding for 103231
+ LOG  [STUB] Generated image embedding for file:///storage/emulated/0/Download/Screenshot 2025-12-22 091132.png
+ LOG  [Index] Generating caption for 103231
+ LOG  [STUB] Generated caption for file:///storage/emulated/0/Download/Screenshot 2025-12-22 091132.png: "Aerial view of terrain and landscapes"
+ LOG  [Index] Saving metadata for 103231
+ ERROR  Failed to generate thumbnail: [TypeError: Cannot read property 'manipulateAsync' of undefined]
+ LOG  [Index] Extracting color for 103144
+ LOG  [Index] Generating embedding for 103144
+ LOG  [STUB] Generated image embedding for file:///storage/emulated/0/DCIM/Facebook/FB_IMG_1776881186418.jpg
+ LOG  [Index] Generating caption for 103144
+ LOG  [STUB] Generated caption for file:///storage/emulated/0/DCIM/Facebook/FB_IMG_1776881186418.jpg: "A vibrant outdoor landscape at sunset"
+ LOG  [Index] Saving metadata for 103144
+ ERROR  Failed to generate thumbnail: [TypeError: Cannot read property 'manipulateAsync' of undefined]
+ LOG  [Index] Extracting color for 102784
+ LOG  [Index] Generating embedding for 102784
+ LOG  [STUB] Generated image embedding for file:///storage/emulated/0/DCIM/Facebook/FB_IMG_1776743374202.jpg
+ LOG  [Index] Generating caption for 102784
+ LOG  [STUB] Generated caption for file:///storage/emulated/0/DCIM/Facebook/FB_IMG_1776743374202.jpg: "Urban architecture and city scenes"
+ LOG  [Index] Saving metadata for 102784
+ ERROR  Failed to generate thumbnail: [TypeError: Cannot read property 'manipulateAsync' of undefined]
+ LOG  [Index] Extracting color for 103238
+ LOG  [Index] Generating embedding for 103238
+ LOG  [STUB] Generated image embedding for file:///storage/emulated/0/Download/FB_IMG_1733806221173.jpg
+ LOG  [Index] Generating caption for 103238
+ LOG  [STUB] Generated caption for file:///storage/emulated/0/Download/FB_IMG_1733806221173.jpg: "Still life arrangement of objects"
+ LOG  [Index] Saving metadata for 103238
+ ERROR  Failed to generate thumbnail: [TypeError: Cannot read property 'manipulateAsync' of undefined]
+ LOG  [Index] Extracting color for 102271
+ LOG  [Index] Generating embedding for 102271
+ LOG  [STUB] Generated image embedding for file:///storage/emulated/0/DCIM/Facebook/FB_IMG_1776502914910.jpg
+ LOG  [Index] Generating caption for 102271
+ LOG  [STUB] Generated caption for file:///storage/emulated/0/DCIM/Facebook/FB_IMG_1776502914910.jpg: "Close-up nature photography with flowers"
+ LOG  [Index] Saving metadata for 102271
+ ERROR  Failed to generate thumbnail: [TypeError: Cannot read property 'manipulateAsync' of undefined]
+ LOG  [Index] Extracting color for 103235
+ LOG  [Index] Generating embedding for 103235
+ LOG  [STUB] Generated image embedding for file:///storage/emulated/0/Download/FB_IMG_1742782400736.jpg
+ LOG  [Index] Generating caption for 103235
+ LOG  [STUB] Generated caption for file:///storage/emulated/0/Download/FB_IMG_1742782400736.jpg: "Abstract composition with geometric shapes"
+ LOG  [Index] Saving metadata for 103235
+ ERROR  Failed to generate thumbnail: [TypeError: Cannot read property 'manipulateAsync' of undefined]
+ LOG  [Index] Extracting color for 103233
+ LOG  [Index] Generating embedding for 103233
+ LOG  [STUB] Generated image embedding for file:///storage/emulated/0/Download/FB_IMG_1754013332062.jpg
+ LOG  [Index] Generating caption for 103233
+ LOG  [STUB] Generated caption for file:///storage/emulated/0/Download/FB_IMG_1754013332062.jpg: "Urban architecture and city scenes"
+ LOG  [Index] Saving metadata for 103233
+ ERROR  Failed to generate thumbnail: [TypeError: Cannot read property 'manipulateAsync' of undefined]
+ LOG  [Index] Extracting color for 101590
+ LOG  [Index] Generating embedding for 101590
+ LOG  [STUB] Generated image embedding for file:///storage/emulated/0/DCIM/Facebook/FB_IMG_1776257678062.jpg
+ LOG  [Index] Generating caption for 101590
+ LOG  [STUB] Generated caption for file:///storage/emulated/0/DCIM/Facebook/FB_IMG_1776257678062.jpg: "Wildlife animal photography"
+ LOG  [Index] Saving metadata for 101590
+ ERROR  Failed to generate thumbnail: [TypeError: Cannot read property 'manipulateAsync' of undefined]
+ LOG  [Index] Extracting color for 100789
+ LOG  [Index] Generating embedding for 100789
+ LOG  [STUB] Generated image embedding for file:///storage/emulated/0/DCIM/Facebook/FB_IMG_1775790841846.jpg
+ LOG  [Index] Generating caption for 100789
+ LOG  [STUB] Generated caption for file:///storage/emulated/0/DCIM/Facebook/FB_IMG_1775790841846.jpg: "Portrait of a person in natural lighting"
+ LOG  [Index] Saving metadata for 100789
+ ERROR  Failed to generate thumbnail: [TypeError: Cannot read property 'manipulateAsync' of undefined]
+ LOG  [Index] Extracting color for 101587
+ LOG  [Index] Generating embedding for 101587
+ LOG  [STUB] Generated image embedding for file:///storage/emulated/0/DCIM/Facebook/FB_IMG_1776257651044.jpg
+ LOG  [Index] Generating caption for 101587
+ LOG  [STUB] Generated caption for file:///storage/emulated/0/DCIM/Facebook/FB_IMG_1776257651044.jpg: "Abstract composition with geometric shapes"
+ LOG  [Index] Saving metadata for 101587
+ ERROR  Failed to generate thumbnail: [TypeError: Cannot read property 'manipulateAsync' of undefined]
+ LOG  [Index] Extracting color for 102159
+ LOG  [Index] Generating embedding for 102159
+ LOG  [STUB] Generated image embedding for file:///storage/emulated/0/Download/c4e5484b-5e86-4e50-a7c9-9b8eb2650a51.jpeg
+ LOG  [Index] Generating caption for 102159
+ LOG  [STUB] Generated caption for file:///storage/emulated/0/Download/c4e5484b-5e86-4e50-a7c9-9b8eb2650a51.jpeg: "Portrait of a person in natural lighting"
+ LOG  [Index] Saving metadata for 102159
+ ERROR  Failed to generate thumbnail: [TypeError: Cannot read property 'manipulateAsync' of undefined]
+ LOG  [Index] Extracting color for 102219
+ LOG  [Index] Generating embedding for 102219
+ LOG  [STUB] Generated image embedding for file:///storage/emulated/0/DCIM/Facebook/FB_IMG_1776483452652.jpg
+ LOG  [Index] Generating caption for 102219
+ LOG  [STUB] Generated caption for file:///storage/emulated/0/DCIM/Facebook/FB_IMG_1776483452652.jpg: "Close-up nature photography with flowers"
+ LOG  [Index] Saving metadata for 102219
+ ERROR  Failed to generate thumbnail: [TypeError: Cannot read property 'manipulateAsync' of undefined]
+ LOG  [Index] Extracting color for 101451
+ LOG  [Index] Generating embedding for 101451
+ LOG  [STUB] Generated image embedding for file:///storage/emulated/0/DCIM/Facebook/FB_IMG_1776133463852.jpg
+ LOG  [Index] Generating caption for 101451
+ LOG  [STUB] Generated caption for file:///storage/emulated/0/DCIM/Facebook/FB_IMG_1776133463852.jpg: "Wildlife animal photography"
+ LOG  [Index] Saving metadata for 101451
+ ERROR  Failed to generate thumbnail: [TypeError: Cannot read property 'manipulateAsync' of undefined]
+ LOG  [Index] Extracting color for 102192
+ LOG  [Index] Generating embedding for 102192
+ LOG  [STUB] Generated image embedding for file:///storage/emulated/0/Download/6ac38568-185c-4b10-987c-7916c221fb39.png
+ LOG  [Index] Generating caption for 102192
+ LOG  [STUB] Generated caption for file:///storage/emulated/0/Download/6ac38568-185c-4b10-987c-7916c221fb39.png: "Abstract composition with geometric shapes"
+ LOG  [Index] Saving metadata for 102192
+ ERROR  Failed to generate thumbnail: [TypeError: Cannot read property 'manipulateAsync' of undefined]
+ LOG  [Index] Extracting color for 101589
+ LOG  [Index] Generating embedding for 101589
+ LOG  [STUB] Generated image embedding for file:///storage/emulated/0/DCIM/Facebook/FB_IMG_1776257673976.jpg
+ LOG  [Index] Generating caption for 101589
+ LOG  [STUB] Generated caption for file:///storage/emulated/0/DCIM/Facebook/FB_IMG_1776257673976.jpg: "Aerial view of terrain and landscapes"
+ LOG  [Index] Saving metadata for 101589
+ ERROR  Failed to generate thumbnail: [TypeError: Cannot read property 'manipulateAsync' of undefined]
+ LOG  [Index] Extracting color for 101615
+ LOG  [Index] Generating embedding for 101615
+ LOG  [STUB] Generated image embedding for file:///storage/emulated/0/Download/culture.jpg
+ LOG  [Index] Generating caption for 101615
+ LOG  [STUB] Generated caption for file:///storage/emulated/0/Download/culture.jpg: "Aerial view of terrain and landscapes"
+ LOG  [Index] Saving metadata for 101615
+ ERROR  Failed to generate thumbnail: [TypeError: Cannot read property 'manipulateAsync' of undefined]
+ LOG  [Index] Extracting color for 101613
+ LOG  [Index] Generating embedding for 101613
+ LOG  [STUB] Generated image embedding for file:///storage/emulated/0/Download/picwish_8822443431_image1.jpg
+ LOG  [Index] Generating caption for 101613
+ LOG  [STUB] Generated caption for file:///storage/emulated/0/Download/picwish_8822443431_image1.jpg: "Abstract composition with geometric shapes"
+ LOG  [Index] Saving metadata for 101613
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ LOG  [Index] Completed: 103241
+ LOG  [Index] Completed: 103239
+ LOG  [Index] Completed: 102230
+ LOG  [Index] Completed: 103240
+ LOG  [Index] Completed: 101613
+ LOG  [Index] Completed: 102923
+ LOG  [Index] Completed: 102471
+ LOG  [Index] Completed: 102852
+ LOG  [Index] Completed: 103011
+ LOG  [Index] Completed: 102853
+ LOG  [Index] Completed: 102532
+ LOG  [Index] Completed: 103237
+ LOG  [Index] Completed: 102224
+ LOG  [Index] Completed: 102776
+ LOG  [Index] Completed: 103012
+ LOG  [Index] Completed: 102561
+ LOG  [Index] Completed: 102472
+ LOG  [Index] Completed: 102919
+ LOG  [Index] Completed: 103242
+ LOG  [Index] Completed: 102998
+ LOG  [Index] Completed: 102920
+ LOG  [Index] Completed: 103234
+ LOG  [Index] Completed: 103238
+ LOG  [Index] Completed: 102854
+ LOG  [Index] Completed: 102763
+ LOG  [Index] Completed: 102784
+ LOG  [Index] Completed: 102801
+ LOG  [Index] Completed: 103000
+ LOG  [Index] Completed: 101590
+ LOG  [Index] Completed: 102219
+ LOG  [Index] Completed: 103179
+ LOG  [Index] Completed: 103231
+ LOG  [Index] Completed: 101587
+ LOG  [Index] Completed: 103144
+ LOG  [Index] Completed: 102921
+ LOG  [Index] Completed: 103232
+ LOG  [Index] Completed: 101589
+ LOG  [Index] Completed: 100789
+ LOG  [Index] Completed: 103235
+ LOG  [Index] Completed: 102855
+ LOG  [Index] Completed: 103121
+ LOG  [Index] Completed: 101451
+ LOG  [Index] Completed: 102192
+ LOG  [Index] Completed: 102997
+ LOG  [Index] Completed: 102271
+ LOG  [Index] Completed: 103233
+ LOG  [Index] Completed: 102222
+ LOG  [Index] Completed: 101615
+ LOG  [Index] Completed: 102159
+ LOG  [Index] Completed: 103236
+Android Bundled 68ms node_modules\expo\AppEntry.js (1 module)
+ LOG  Already indexed: 103241
+ LOG  Already indexed: 103242
+ LOG  Already indexed: 103240
+ LOG  Already indexed: 102159
+ LOG  Already indexed: 102801
+ LOG  Already indexed: 102854
+ LOG  Already indexed: 103121
+ LOG  Already indexed: 102784
+ LOG  Already indexed: 103000
+ LOG  Already indexed: 102471
+ LOG  Already indexed: 102532
+ LOG  Already indexed: 102219
+ LOG  Already indexed: 101590
+ LOG  Already indexed: 102776
+ LOG  Already indexed: 102997
+ LOG  Already indexed: 103236
+ LOG  Already indexed: 102472
+ LOG  Already indexed: 103233
+ LOG  Already indexed: 103232
+ LOG  Already indexed: 102230
+ LOG  Already indexed: 103234
+ LOG  Already indexed: 102222
+ LOG  Already indexed: 103235
+ LOG  Already indexed: 102923
+ LOG  Already indexed: 102920
+ LOG  Already indexed: 102224
+ LOG  Already indexed: 103238
+ LOG  Already indexed: 102921
+ LOG  Already indexed: 102763
+ LOG  Already indexed: 102853
+ LOG  Already indexed: 102855
+ LOG  Already indexed: 102192
+ LOG  Already indexed: 102271
+ LOG  Already indexed: 102998
+ LOG  Already indexed: 103239
+ LOG  Already indexed: 103012
+ LOG  Already indexed: 102919
+ LOG  Already indexed: 101613
+ LOG  Already indexed: 102561
+ LOG  Already indexed: 102852
+ LOG  Already indexed: 103011
+ LOG  Already indexed: 103179
+ LOG  Already indexed: 103231
+ LOG  Already indexed: 101615
+ LOG  Already indexed: 101589
+ LOG  Already indexed: 103237
+ LOG  Already indexed: 103144
+ LOG  [Index] Generating thumbnail for 102081
+ LOG  [Index] Generating thumbnail for 102064
+ LOG  [Index] Generating thumbnail for 102220
+ ERROR  Failed to generate thumbnail: [TypeError: Cannot read property 'manipulateAsync' of undefined]
+ LOG  [Index] Extracting color for 102081
+ LOG  [Index] Generating embedding for 102081
+ LOG  [STUB] Generated image embedding for file:///storage/emulated/0/Download/WhatsAppImage2018-11-01at1.41.21AM.jpeg
+ LOG  [Index] Generating caption for 102081
+ LOG  [STUB] Generated caption for file:///storage/emulated/0/Download/WhatsAppImage2018-11-01at1.41.21AM.jpeg: "Urban architecture and city scenes"
+ LOG  [Index] Saving metadata for 102081
+ ERROR  Failed to generate thumbnail: [TypeError: Cannot read property 'manipulateAsync' of undefined]
+ LOG  [Index] Extracting color for 102064
+ LOG  [Index] Generating embedding for 102064
+ LOG  [STUB] Generated image embedding for file:///storage/emulated/0/DCIM/Facebook/FB_IMG_1776411327703.jpg
+ LOG  [Index] Generating caption for 102064
+ LOG  [STUB] Generated caption for file:///storage/emulated/0/DCIM/Facebook/FB_IMG_1776411327703.jpg: "Aerial view of terrain and landscapes"
+ LOG  [Index] Saving metadata for 102064
+ ERROR  Failed to generate thumbnail: [TypeError: Cannot read property 'manipulateAsync' of undefined]
+ LOG  [Index] Extracting color for 102220
+ LOG  [Index] Generating embedding for 102220
+ LOG  [STUB] Generated image embedding for file:///storage/emulated/0/DCIM/Facebook/FB_IMG_1776484061710.jpg
+ LOG  [Index] Generating caption for 102220
+ LOG  [STUB] Generated caption for file:///storage/emulated/0/DCIM/Facebook/FB_IMG_1776484061710.jpg: "Close-up nature photography with flowers"
+ LOG  [Index] Saving metadata for 102220
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+ LOG  [Index] Completed: 102081
+ LOG  [Index] Completed: 102220
+ LOG  [Index] Completed: 102064
+ WARN  [Reanimated] Property "opacity" of AnimatedComponent(View) may be overwritten by a layout animation. Please wrap your component with an animated view and apply the layout animation on the wrapper.
+Android Bundled 106ms node_modules\expo\AppEntry.js (1 module)

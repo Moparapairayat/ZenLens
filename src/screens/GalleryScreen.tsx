@@ -18,6 +18,7 @@ import Animated, { FadeInDown } from 'react-native-reanimated';
 import { useTheme } from '../styles/theme';
 import { getAllMedia, MediaRecord } from '../db/mediaRepository';
 import { indexMedia } from '../utils/backgroundIndexer';
+import { syncDeviceMediaLibrary, type MediaLibrarySyncResult } from '../utils/mediaLibrarySync';
 import GlassCard from '../components/GlassCard';
 import MasonryGrid from '../components/MasonryGrid';
 import ProgressiveImage from '../components/ProgressiveImage';
@@ -41,14 +42,30 @@ export default function GalleryScreen({ navigation }: GalleryScreenProps): JSX.E
   const theme = useTheme();
   const [mediaItems, setMediaItems] = useState<MediaRecord[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isSyncing, setIsSyncing] = useState(false);
+  const [syncResult, setSyncResult] = useState<MediaLibrarySyncResult | null>(null);
   const [offset, setOffset] = useState(0);
   const [hasMore, setHasMore] = useState(true);
 
   const indexedLabel = useMemo(() => `${mediaItems.length}`, [mediaItems.length]);
 
-  const loadMedia = useCallback(async (pageOffset = 0): Promise<void> => {
+  const syncLibrary = useCallback(async (): Promise<void> => {
+    setIsSyncing(true);
+    try {
+      setSyncResult(await syncDeviceMediaLibrary());
+    } finally {
+      setIsSyncing(false);
+    }
+  }, []);
+
+  const loadMedia = useCallback(async (pageOffset = 0, shouldSync = pageOffset === 0): Promise<void> => {
     try {
       setIsLoading(true);
+
+      if (shouldSync) {
+        await syncLibrary();
+      }
+
       const items = await getAllMedia(ITEMS_PER_PAGE, pageOffset);
 
       if (pageOffset === 0) {
@@ -68,7 +85,7 @@ export default function GalleryScreen({ navigation }: GalleryScreenProps): JSX.E
     } finally {
       setIsLoading(false);
     }
-  }, []);
+  }, [syncLibrary]);
 
   useEffect(() => {
     loadMedia(0);
@@ -76,7 +93,7 @@ export default function GalleryScreen({ navigation }: GalleryScreenProps): JSX.E
 
   const handleLoadMore = useCallback((): void => {
     if (hasMore && !isLoading) {
-      loadMedia(offset + ITEMS_PER_PAGE);
+      loadMedia(offset + ITEMS_PER_PAGE, false);
     }
   }, [hasMore, isLoading, loadMedia, offset]);
 
@@ -86,6 +103,10 @@ export default function GalleryScreen({ navigation }: GalleryScreenProps): JSX.E
     },
     [navigation]
   );
+
+  const handleSyncNow = useCallback((): void => {
+    loadMedia(0, true);
+  }, [loadMedia]);
 
   const renderGridItem = useCallback(
     ({ item }: { item: MediaRecord }) => (
@@ -128,11 +149,13 @@ export default function GalleryScreen({ navigation }: GalleryScreenProps): JSX.E
             <View style={styles.titleBlock}>
               <Text style={[styles.eyebrow, { color: theme.colors.primary }]}>ZENLENS</Text>
               <Text style={[styles.title, { color: theme.colors.text }]}>Local gallery intelligence</Text>
-              <Text style={[styles.subtitle, { color: theme.colors.textSecondary }]}>
-                {Platform.OS === 'web'
-                  ? 'Web preview is ready. Native media appears after device permission.'
-                  : 'Media appears after library permission and background indexing.'}
-              </Text>
+            <Text style={[styles.subtitle, { color: theme.colors.textSecondary }]}>
+              {Platform.OS === 'web'
+                ? 'Web preview is ready. Native media appears after device permission.'
+                : syncResult?.status === 'permission-denied'
+                  ? 'Photo permission is blocked. Allow access to show your local photos.'
+                  : syncResult?.message || 'Media appears after library permission and background indexing.'}
+            </Text>
             </View>
 
             <View style={[styles.liveBadge, { borderColor: theme.colors.border }]}>
@@ -184,15 +207,41 @@ export default function GalleryScreen({ navigation }: GalleryScreenProps): JSX.E
 
           <GlassCard style={styles.statusPanel}>
             <View style={styles.statusIcon}>
-              <Ionicons name="cloud-offline-outline" size={22} color={theme.colors.primary} />
+              <Ionicons
+                name={syncResult?.status === 'permission-denied' ? 'lock-closed-outline' : 'cloud-offline-outline'}
+                size={22}
+                color={theme.colors.primary}
+              />
             </View>
             <View style={styles.statusText}>
-              <Text style={[styles.statusTitle, { color: theme.colors.text }]}>Offline index waiting</Text>
+              <Text style={[styles.statusTitle, { color: theme.colors.text }]}>
+                {syncResult?.status === 'permission-denied'
+                  ? 'Photo access needed'
+                  : isSyncing
+                    ? 'Syncing device library'
+                    : 'Offline index waiting'}
+              </Text>
               <Text style={[styles.statusBody, { color: theme.colors.textSecondary }]}>
-                Use Android or iOS to grant library access. Web preview keeps the interface visible without
-                reading local photos.
+                {Platform.OS === 'web'
+                  ? 'Use Android or iOS to grant library access. Web preview keeps the interface visible.'
+                  : syncResult?.message ||
+                    'Tap sync and allow photo access so ZenLens can import your recent local photos.'}
               </Text>
             </View>
+            {Platform.OS !== 'web' && (
+              <TouchableOpacity
+                accessibilityLabel="Sync local photo library"
+                onPress={handleSyncNow}
+                disabled={isSyncing}
+                style={[styles.syncButton, { backgroundColor: theme.colors.primary }]}
+              >
+                {isSyncing ? (
+                  <ActivityIndicator color="#090A0F" />
+                ) : (
+                  <Ionicons name="sync" size={18} color="#090A0F" />
+                )}
+              </TouchableOpacity>
+            )}
           </GlassCard>
         </ScrollView>
       </SafeAreaView>
@@ -208,10 +257,15 @@ export default function GalleryScreen({ navigation }: GalleryScreenProps): JSX.E
         </View>
         <TouchableOpacity
           accessibilityLabel="Refresh gallery"
-          onPress={() => loadMedia(0)}
+          onPress={handleSyncNow}
           style={[styles.iconButton, { borderColor: theme.colors.border }]}
+          disabled={isSyncing}
         >
-          <Ionicons name="refresh" size={18} color={theme.colors.text} />
+          {isSyncing ? (
+            <ActivityIndicator color={theme.colors.primary} />
+          ) : (
+            <Ionicons name="refresh" size={18} color={theme.colors.text} />
+          )}
         </TouchableOpacity>
       </View>
 
@@ -312,6 +366,7 @@ const styles = StyleSheet.create({
   },
   statusPanel: {
     flexDirection: 'row',
+    alignItems: 'center',
     padding: 14,
     gap: 12,
   },
@@ -334,6 +389,13 @@ const styles = StyleSheet.create({
   statusBody: {
     fontSize: 13,
     lineHeight: 18,
+  },
+  syncButton: {
+    width: 42,
+    height: 42,
+    borderRadius: 8,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   loadedHeader: {
     flexDirection: 'row',

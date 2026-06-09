@@ -3,8 +3,7 @@
  * Image loading, caching, and manipulation helpers
  */
 import * as FileSystem from 'expo-file-system/legacy';
-import ImageManipulator from 'expo-image-manipulator';
-import { Platform } from 'react-native';
+import { manipulateAsync, SaveFormat, type Action } from 'expo-image-manipulator';
 
 function getFileSize(info: FileSystem.FileInfo): number {
   return info.exists && 'size' in info && typeof info.size === 'number' ? info.size : 0;
@@ -24,14 +23,14 @@ export async function generateThumbnail(
   size: number = 200
 ): Promise<string | null> {
   try {
-    const result = await ImageManipulator.manipulateAsync(imageUri, [{ resize: { width: size, height: size } }], {
+    const result = await manipulateAsync(imageUri, [{ resize: { width: size, height: size } }], {
       compress: 0.7,
-      format: ImageManipulator.SaveFormat.JPEG,
+      format: SaveFormat.JPEG,
     });
 
     return result.uri;
   } catch (error) {
-    console.error('Failed to generate thumbnail:', error);
+    console.warn('Failed to generate thumbnail:', error);
     return null;
   }
 }
@@ -85,7 +84,7 @@ export async function cacheThumbnail(
 
     return cachedPath;
   } catch (error) {
-    console.error('Failed to cache thumbnail:', error);
+    console.warn('Failed to cache thumbnail:', error);
     return null;
   }
 }
@@ -166,12 +165,12 @@ export async function clearOldThumbnails(maxCacheSize: number = 50 * 1024 * 1024
 export async function exportImage(
   imageUri: string,
   filename: string,
-  actions: ImageManipulator.Action[] = []
+  actions: Action[] = []
 ): Promise<string | null> {
   try {
-    const result = await ImageManipulator.manipulateAsync(imageUri, actions, {
+    const result = await manipulateAsync(imageUri, actions, {
       compress: 0.9,
-      format: ImageManipulator.SaveFormat.JPEG,
+      format: SaveFormat.JPEG,
     });
 
     return result.uri;
