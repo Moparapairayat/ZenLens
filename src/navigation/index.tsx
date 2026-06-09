@@ -31,7 +31,7 @@ function GalleryStackNavigator() {
         },
         headerTintColor: theme.colors.text,
         headerTitleStyle: {
-          fontWeight: '600',
+          fontWeight: '800',
         },
         contentStyle: {
           backgroundColor: theme.colors.background,
@@ -77,6 +77,13 @@ export function RootNavigator(): JSX.Element {
         tabBarStyle: {
           backgroundColor: theme.colors.surface,
           borderTopColor: theme.colors.border,
+          height: 62,
+          paddingTop: 6,
+          paddingBottom: 8,
+        },
+        tabBarLabelStyle: {
+          fontSize: 11,
+          fontWeight: '800',
         },
         headerShown: false,
       }}

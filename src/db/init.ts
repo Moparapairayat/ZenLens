@@ -2,10 +2,72 @@
  * Database initialization and schema.
  * Uses Expo SQLite so the managed workflow works across native targets and web.
  */
+import { Platform } from 'react-native';
 import * as SQLite from 'expo-sqlite';
 import type { SQLiteDatabase } from 'expo-sqlite';
 
-let databasePromise: Promise<SQLiteDatabase> | null = null;
+type SQLiteValue = string | number | null;
+
+export interface ZenLensDatabase {
+  execAsync(source: string): Promise<void>;
+  runAsync(source: string, params?: SQLiteValue[]): Promise<unknown>;
+  getFirstAsync<T>(source: string, params?: SQLiteValue[]): Promise<T | null>;
+  getAllAsync<T>(source: string, params?: SQLiteValue[]): Promise<T[]>;
+  closeAsync(): Promise<void>;
+}
+
+interface MemoryMediaRow {
+  id: string;
+  uri: string;
+  filename: string;
+  width: number;
+  height: number;
+  duration: number | null;
+  mimeType: string | null;
+  fileSize: number | null;
+  createdAt: number;
+  modifiedAt: number;
+  isVideo: number;
+  isDeleted: number;
+  deletedAt: number | null;
+  albumId: string | null;
+  thumbnailUri?: string;
+}
+
+interface MemoryMetadataRow {
+  id: string;
+  mediaId: string;
+  caption: string | null;
+  tags: string | null;
+  embedding: string | null;
+  embeddingQuantized: string | null;
+  dominantColor: string | null;
+  colorPalette: string | null;
+  exifData: string | null;
+  createdAt: number;
+  updatedAt: number;
+}
+
+interface MemoryThumbnailRow {
+  id: string;
+  mediaId: string;
+  thumbnailUri: string;
+  size: number;
+  createdAt: number;
+}
+
+interface MemoryEditRow {
+  id: string;
+  mediaId: string;
+  operationIndex: number;
+  operationType: string;
+  params: string;
+  isFinal: number;
+  exportedUri: string | null;
+  createdAt: number;
+}
+
+let databasePromise: Promise<ZenLensDatabase> | null = null;
 
 export const SCHEMA = {
   media: `
@@ -118,9 +180,25 @@ export const SCHEMA = {
 /**
  * Returns the shared database connection, opening it lazily.
  */
-export function getDatabase(): Promise<SQLiteDatabase> {
-  databasePromise ??= SQLite.openDatabaseAsync('zenlens.db');
+export function getDatabase(): Promise<ZenLensDatabase> {
+  if (!databasePromise) {
+    databasePromise =
+      Platform.OS === 'web' ? Promise.resolve(createMemoryDatabase()) : openNativeDatabase();
+  }
   return databasePromise;
+}
+
+async function openNativeDatabase(): Promise<ZenLensDatabase> {
+  const db: SQLiteDatabase = await SQLite.openDatabaseAsync('zenlens.db');
+  return {
+    execAsync: (source: string) => db.execAsync(source),
+    runAsync: (source: string, params: SQLiteValue[] = []) => db.runAsync(source, params),
+    getFirstAsync: <T,>(source: string, params: SQLiteValue[] = []) =>
+      db.getFirstAsync<T>(source, params),
+    getAllAsync: <T,>(source: string, params: SQLiteValue[] = []) =>
+      db.getAllAsync<T>(source, params),
+    closeAsync: () => db.closeAsync(),
+  };
 }
 
 /**
@@ -151,4 +229,167 @@ export async function closeDatabase(): Promise<void> {
   const db = await databasePromise;
   await db.closeAsync();
   databasePromise = null;
+}
+
+function createMemoryDatabase(): ZenLensDatabase {
+  const media = new Map<string, MemoryMediaRow>();
+  const metadata = new Map<string, MemoryMetadataRow>();
+  const thumbnails = new Map<string, MemoryThumbnailRow>();
+  const edits: MemoryEditRow[] = [];
+
+  return {
+    async execAsync(): Promise<void> {
+      return undefined;
+    },
+
+    async runAsync(source: string, params: SQLiteValue[] = []): Promise<unknown> {
+      const normalized = source.replace(/\s+/g, ' ').trim();
+
+      if (normalized.startsWith('INSERT INTO media')) {
+        const [
+          id,
+          uri,
+          filename,
+          width,
+          height,
+          duration,
+          mimeType,
+          fileSize,
+          createdAt,
+          modifiedAt,
+          isVideo,
+          albumId,
+        ] = params;
+        media.set(String(id), {
+          id: String(id),
+          uri: String(uri),
+          filename: String(filename),
+          width: Number(width),
+          height: Number(height),
+          duration: duration == null ? null : Number(duration),
+          mimeType: mimeType == null ? null : String(mimeType),
+          fileSize: fileSize == null ? null : Number(fileSize),
+          createdAt: Number(createdAt),
+          modifiedAt: Number(modifiedAt),
+          isVideo: Number(isVideo),
+          isDeleted: 0,
+          deletedAt: null,
+          albumId: albumId == null ? null : String(albumId),
+        });
+      }
+
+      if (normalized.startsWith('INSERT OR REPLACE INTO metadata')) {
+        const [
+          id,
+          mediaId,
+          caption,
+          tags,
+          embedding,
+          embeddingQuantized,
+          dominantColor,
+          colorPalette,
+          exifData,
+          createdAt,
+          updatedAt,
+        ] = params;
+        metadata.set(String(mediaId), {
+          id: String(id),
+          mediaId: String(mediaId),
+          caption: caption == null ? null : String(caption),
+          tags: tags == null ? null : String(tags),
+          embedding: embedding == null ? null : String(embedding),
+          embeddingQuantized: embeddingQuantized == null ? null : String(embeddingQuantized),
+          dominantColor: dominantColor == null ? null : String(dominantColor),
+          colorPalette: colorPalette == null ? null : String(colorPalette),
+          exifData: exifData == null ? null : String(exifData),
+          createdAt: Number(createdAt),
+          updatedAt: Number(updatedAt),
+        });
+      }
+
+      if (normalized.startsWith('INSERT OR REPLACE INTO thumbnails')) {
+        const [id, mediaId, thumbnailUri, size, createdAt] = params;
+        thumbnails.set(String(mediaId), {
+          id: String(id),
+          mediaId: String(mediaId),
+          thumbnailUri: String(thumbnailUri),
+          size: Number(size),
+          createdAt: Number(createdAt),
+        });
+      }
+
+      if (normalized.startsWith('INSERT INTO edits')) {
+        const [id, mediaId, operationIndex, operationType, editParams, isFinal, exportedUri, createdAt] =
+          params;
+        edits.push({
+          id: String(id),
+          mediaId: String(mediaId),
+          operationIndex: Number(operationIndex),
+          operationType: String(operationType),
+          params: String(editParams),
+          isFinal: Number(isFinal),
+          exportedUri: exportedUri == null ? null : String(exportedUri),
+          createdAt: Number(createdAt),
+        });
+      }
+
+      if (normalized.startsWith('UPDATE media SET isDeleted')) {
+        const [deletedAt, mediaId] = params;
+        const row = media.get(String(mediaId));
+        if (row) {
+          row.isDeleted = 1;
+          row.deletedAt = Number(deletedAt);
+        }
+      }
+
+      return { changes: 1 };
+    },
+
+    async getFirstAsync<T>(source: string, params: SQLiteValue[] = []): Promise<T | null> {
+      const normalized = source.replace(/\s+/g, ' ').trim();
+
+      if (normalized.includes('FROM media') && normalized.includes('WHERE media.id = ?')) {
+        const row = media.get(String(params[0]));
+        if (!row || row.isDeleted === 1) {
+          return null;
+        }
+        return { ...row, thumbnailUri: thumbnails.get(row.id)?.thumbnailUri } as T;
+      }
+
+      if (normalized.includes('FROM metadata')) {
+        return (metadata.get(String(params[0])) as T | undefined) ?? null;
+      }
+
+      return null;
+    },
+
+    async getAllAsync<T>(source: string, params: SQLiteValue[] = []): Promise<T[]> {
+      const normalized = source.replace(/\s+/g, ' ').trim();
+
+      if (normalized.includes('FROM media')) {
+        const limit = Number(params[0] ?? 50);
+        const offset = Number(params[1] ?? 0);
+        return Array.from(media.values())
+          .filter((row) => row.isDeleted === 0)
+          .sort((a, b) => b.createdAt - a.createdAt)
+          .slice(offset, offset + limit)
+          .map((row) => ({ ...row, thumbnailUri: thumbnails.get(row.id)?.thumbnailUri }) as T);
+      }
+
+      if (normalized.includes('FROM edits')) {
+        return edits
+          .filter((row) => row.mediaId === String(params[0]))
+          .sort((a, b) => a.operationIndex - b.operationIndex) as T[];
+      }
+
+      return [];
+    },
+
+    async closeAsync(): Promise<void> {
+      media.clear();
+      metadata.clear();
+      thumbnails.clear();
+      edits.splice(0, edits.length);
+    },
+  };
 }

@@ -1,25 +1,18 @@
 /**
  * Search Screen
- * Natural language search with embedding-based similarity
+ * Natural language search with embedding-based similarity.
  */
-import React, { useEffect, useState, useCallback } from 'react';
-import {
-  View,
-  StyleSheet,
-  FlatList,
-  TouchableOpacity,
-  Text,
-  ActivityIndicator,
-} from 'react-native';
+import React, { useCallback, useEffect, useState } from 'react';
+import { ActivityIndicator, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from '../styles/theme';
-import { getAllMedia, getMetadataRecord } from '../db/mediaRepository';
-import { runTextEmbedding } from '../ai/embeddingStub';
+import { getAllMedia, getMetadataRecord, type MediaRecord } from '../db/mediaRepository';
+import { runTextEmbedding, dequantizeEmbedding } from '../ai/embeddingStub';
 import { findTopNSimilar } from '../ai/similarity';
-import { dequantizeEmbedding } from '../ai/embeddingStub';
+import GlassCard from '../components/GlassCard';
 import HoloSearchBar from '../components/HoloSearchBar';
-import ProgressiveImage from '../components/ProgressiveImage';
 import MasonryGrid from '../components/MasonryGrid';
+import ProgressiveImage from '../components/ProgressiveImage';
 
 interface SearchResult {
   id: string;
@@ -32,22 +25,19 @@ interface SearchScreenProps {
   navigation: any;
 }
 
+const queryChips = ['night portraits', 'food table', 'quiet streets', 'green landscape'];
+
 export default function SearchScreen({ navigation }: SearchScreenProps): JSX.Element {
   const theme = useTheme();
   const [searchQuery, setSearchQuery] = useState('');
   const [results, setResults] = useState<SearchResult[]>([]);
   const [isSearching, setIsSearching] = useState(false);
-  const [allMedia, setAllMedia] = useState<any[]>([]);
+  const [allMedia, setAllMedia] = useState<MediaRecord[]>([]);
 
-  /**
-   * Load all media on mount
-   */
   useEffect(() => {
-    const loadAllMedia = async () => {
+    const loadAllMedia = async (): Promise<void> => {
       try {
-        // Load all media for similarity search
-        const media = await getAllMedia(10000, 0); // Adjust limit as needed
-        setAllMedia(media);
+        setAllMedia(await getAllMedia(10000, 0));
       } catch (error) {
         console.error('Failed to load media:', error);
       }
@@ -56,53 +46,46 @@ export default function SearchScreen({ navigation }: SearchScreenProps): JSX.Ele
     loadAllMedia();
   }, []);
 
-  /**
-   * Perform search
-   */
   const handleSearch = useCallback(
-    async (query: string) => {
-      if (query.length < 2) {
+    async (query: string): Promise<void> => {
+      if (query.trim().length < 2) {
         setResults([]);
         return;
       }
 
       try {
         setIsSearching(true);
-
-        // Generate query embedding
         const queryEmbedding = await runTextEmbedding(query);
-
-        // Get embeddings for all media
         const candidates = await Promise.all(
           allMedia.map(async (media) => {
             const metadata = await getMetadataRecord(media.id);
-            if (metadata?.embeddingQuantized) {
-              const embedding = dequantizeEmbedding(metadata.embeddingQuantized);
-              return { mediaId: media.id, embedding };
-            }
-            return null;
+            return metadata?.embeddingQuantized
+              ? { mediaId: media.id, embedding: dequantizeEmbedding(metadata.embeddingQuantized) }
+              : null;
           })
         );
 
-        const validCandidates = candidates.filter(Boolean) as any[];
+        const similar = findTopNSimilar(
+          queryEmbedding,
+          candidates.filter(Boolean) as Array<{ mediaId: string; embedding: Float32Array }>,
+          20
+        );
 
-        // Find similar results
-        const similar = findTopNSimilar(queryEmbedding, validCandidates, 20);
-
-        // Build results with full media data
-        const searchResults = similar
-          .map((result) => {
-            const mediaData = allMedia.find((m) => m.id === result.mediaId);
-            return {
-              id: result.mediaId,
-              uri: mediaData?.uri,
-              score: result.score,
-              filename: mediaData?.filename,
-            };
-          })
-          .filter((r) => r.uri);
-
-        setResults(searchResults);
+        setResults(
+          similar
+            .map((result) => {
+              const mediaData = allMedia.find((media) => media.id === result.mediaId);
+              return mediaData
+                ? {
+                    id: result.mediaId,
+                    uri: mediaData.uri,
+                    score: result.score,
+                    filename: mediaData.filename,
+                  }
+                : null;
+            })
+            .filter(Boolean) as SearchResult[]
+        );
       } catch (error) {
         console.error('Search error:', error);
       } finally {
@@ -112,37 +95,25 @@ export default function SearchScreen({ navigation }: SearchScreenProps): JSX.Ele
     [allMedia]
   );
 
-  /**
-   * Debounced search
-   */
   useEffect(() => {
     const debounceTimer = setTimeout(() => {
       handleSearch(searchQuery);
-    }, 500);
+    }, 420);
 
     return () => clearTimeout(debounceTimer);
   }, [searchQuery, handleSearch]);
 
-  /**
-   * Render grid item
-   */
   const renderGridItem = useCallback(
     ({ item }: { item: SearchResult }) => (
       <TouchableOpacity
-        activeOpacity={0.7}
+        activeOpacity={0.74}
+        accessibilityLabel={`Open ${item.filename}`}
         onPress={() => navigation.navigate('GalleryTab', { screen: 'PhotoView', params: { mediaId: item.id } })}
         style={styles.gridItem}
       >
         <ProgressiveImage uri={item.uri} style={styles.image} />
-        <View
-          style={[
-            styles.scoreOverlay,
-            {
-              backgroundColor: theme.colors.primary,
-            },
-          ]}
-        >
-          <Text style={styles.scoreText}>{(item.score * 100).toFixed(0)}%</Text>
+        <View style={[styles.scoreOverlay, { backgroundColor: theme.colors.primary }]}>
+          <Text style={styles.scoreText}>{Math.max(0, item.score * 100).toFixed(0)}%</Text>
         </View>
       </TouchableOpacity>
     ),
@@ -150,98 +121,70 @@ export default function SearchScreen({ navigation }: SearchScreenProps): JSX.Ele
   );
 
   return (
-    <View
-      style={[
-        styles.container,
-        {
-          backgroundColor: theme.colors.background,
-        },
-      ]}
-    >
-      {/* Search Bar */}
-      <HoloSearchBar
-        placeholder="Search with natural language..."
-        value={searchQuery}
-        onChangeText={setSearchQuery}
-      />
+    <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
+      <ScrollView contentContainerStyle={styles.headerContent}>
+        <View style={styles.headerRow}>
+          <View style={styles.headerText}>
+            <Text style={[styles.eyebrow, { color: theme.colors.accent }]}>SEMANTIC FIND</Text>
+            <Text style={[styles.title, { color: theme.colors.text }]}>Ask the archive</Text>
+          </View>
+          <View style={[styles.indexPill, { borderColor: theme.colors.border }]}>
+            <Ionicons name="layers-outline" size={15} color={theme.colors.primary} />
+            <Text style={[styles.indexPillText, { color: theme.colors.textSecondary }]}>
+              {allMedia.length}
+            </Text>
+          </View>
+        </View>
 
-      {/* Loading Indicator */}
+        <HoloSearchBar
+          placeholder="Search photos by scene, object, mood"
+          value={searchQuery}
+          onChangeText={setSearchQuery}
+        />
+
+        <View style={styles.chipRow}>
+          {queryChips.map((chip) => (
+            <TouchableOpacity
+              key={chip}
+              accessibilityLabel={`Search ${chip}`}
+              onPress={() => setSearchQuery(chip)}
+              style={[styles.chip, { borderColor: theme.colors.border }]}
+            >
+              <Text style={[styles.chipText, { color: theme.colors.textSecondary }]}>{chip}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+      </ScrollView>
+
       {isSearching && (
         <View style={styles.loadingContainer}>
           <ActivityIndicator size="large" color={theme.colors.primary} />
         </View>
       )}
 
-      {/* Results or Empty State */}
-      {results.length === 0 && !isSearching && searchQuery.length > 0 && (
+      {!isSearching && results.length > 0 && (
+        <MasonryGrid data={results} renderItem={renderGridItem} keyExtractor={(item) => item.id} />
+      )}
+
+      {!isSearching && results.length === 0 && (
         <View style={styles.emptyContainer}>
-          <Ionicons name="search" size={48} color={theme.colors.textTertiary} />
-          <Text
-            style={[
-              styles.emptyText,
-              {
-                color: theme.colors.textSecondary,
-              },
-            ]}
-          >
-            No results found
-          </Text>
-        </View>
-      )}
-
-      {/* Grid of Results */}
-      {results.length > 0 && (
-        <MasonryGrid
-          data={results}
-          renderItem={renderGridItem}
-          keyExtractor={(item) => item.id}
-          scrollEnabled={true}
-        />
-      )}
-
-      {/* Tips */}
-      {results.length === 0 && !isSearching && searchQuery.length === 0 && (
-        <View style={styles.tipsContainer}>
-          <Text
-            style={[
-              styles.tipsTitle,
-              {
-                color: theme.colors.text,
-              },
-            ]}
-          >
-            Search Tips
-          </Text>
-          <Text
-            style={[
-              styles.tipText,
-              {
-                color: theme.colors.textSecondary,
-              },
-            ]}
-          >
-            • Try descriptive phrases: "sunset over mountains"
-          </Text>
-          <Text
-            style={[
-              styles.tipText,
-              {
-                color: theme.colors.textSecondary,
-              },
-            ]}
-          >
-            • Use object names: "dog", "beach", "food"
-          </Text>
-          <Text
-            style={[
-              styles.tipText,
-              {
-                color: theme.colors.textSecondary,
-              },
-            ]}
-          >
-            • Combine multiple terms for better results
-          </Text>
+          <GlassCard style={styles.emptyCard}>
+            <Ionicons
+              name={searchQuery ? 'search-outline' : 'sparkles-outline'}
+              size={30}
+              color={theme.colors.primary}
+            />
+            <View style={styles.emptyTextBlock}>
+              <Text style={[styles.emptyTitle, { color: theme.colors.text }]}>
+                {searchQuery ? 'No matches yet' : 'Semantic index ready'}
+              </Text>
+              <Text style={[styles.emptyBody, { color: theme.colors.textSecondary }]}>
+                {allMedia.length === 0
+                  ? 'Indexed photos will appear here after local media is added.'
+                  : 'Try a more visual phrase or choose one of the chips above.'}
+              </Text>
+            </View>
+          </GlassCard>
         </View>
       )}
     </View>
@@ -252,16 +195,72 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  headerContent: {
+    paddingHorizontal: 16,
+    paddingTop: 14,
+    paddingBottom: 8,
+    gap: 12,
+  },
+  headerRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  headerText: {
+    flex: 1,
+    gap: 3,
+  },
+  eyebrow: {
+    fontSize: 11,
+    fontWeight: '800',
+    letterSpacing: 0,
+  },
+  title: {
+    fontSize: 26,
+    fontWeight: '800',
+    letterSpacing: 0,
+  },
+  indexPill: {
+    height: 34,
+    minWidth: 58,
+    borderRadius: 8,
+    borderWidth: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 6,
+  },
+  indexPillText: {
+    fontSize: 12,
+    fontWeight: '800',
+  },
+  chipRow: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 8,
+  },
+  chip: {
+    borderWidth: 1,
+    borderRadius: 8,
+    paddingHorizontal: 10,
+    paddingVertical: 8,
+  },
+  chipText: {
+    fontSize: 12,
+    fontWeight: '700',
+  },
   loadingContainer: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
+    justifyContent: 'center',
   },
   gridItem: {
     flex: 1,
     aspectRatio: 1,
     margin: 2,
     position: 'relative',
+    borderRadius: 8,
+    overflow: 'hidden',
   },
   image: {
     flex: 1,
@@ -272,35 +271,34 @@ const styles = StyleSheet.create({
     right: 8,
     paddingHorizontal: 8,
     paddingVertical: 4,
-    borderRadius: 6,
+    borderRadius: 8,
   },
   scoreText: {
-    color: '#FFFFFF',
+    color: '#090A0F',
     fontSize: 12,
-    fontWeight: '700',
+    fontWeight: '800',
   },
   emptyContainer: {
     flex: 1,
+    paddingHorizontal: 16,
     justifyContent: 'center',
+  },
+  emptyCard: {
+    padding: 18,
+    flexDirection: 'row',
     alignItems: 'center',
-    gap: 12,
+    gap: 14,
   },
-  emptyText: {
-    fontSize: 16,
-    fontWeight: '500',
-  },
-  tipsContainer: {
+  emptyTextBlock: {
     flex: 1,
-    justifyContent: 'center',
-    paddingHorizontal: 24,
-    gap: 16,
+    gap: 4,
   },
-  tipsTitle: {
-    fontSize: 18,
-    fontWeight: '700',
+  emptyTitle: {
+    fontSize: 17,
+    fontWeight: '800',
   },
-  tipText: {
-    fontSize: 14,
-    lineHeight: 20,
+  emptyBody: {
+    fontSize: 13,
+    lineHeight: 18,
   },
 });

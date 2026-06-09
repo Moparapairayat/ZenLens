@@ -9,7 +9,6 @@ import {
   TouchableOpacity,
   Text,
   ScrollView,
-  Dimensions,
 } from 'react-native';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 import { Ionicons } from '@expo/vector-icons';
@@ -17,8 +16,6 @@ import { useTheme } from '../styles/theme';
 import { getMediaRecord, getMetadataRecord, MediaRecord } from '../db/mediaRepository';
 import ProgressiveImage from '../components/ProgressiveImage';
 import GlassCard from '../components/GlassCard';
-
-const { width: screenWidth } = Dimensions.get('window');
 
 interface PhotoViewScreenProps {
   route: any;
@@ -178,6 +175,7 @@ export default function PhotoViewScreen({ route, navigation }: PhotoViewScreenPr
         <TouchableOpacity
           style={styles.closeButton}
           onPress={() => navigation.goBack()}
+          accessibilityLabel="Close photo"
         >
           <Ionicons name="close" size={24} color={theme.colors.text} />
         </TouchableOpacity>
@@ -198,17 +196,23 @@ export default function PhotoViewScreen({ route, navigation }: PhotoViewScreenPr
           <TouchableOpacity
             style={[styles.actionButton, { backgroundColor: theme.colors.primary }]}
             onPress={handleEdit}
+            accessibilityLabel="Edit photo"
           >
-            <Ionicons name="pencil" size={20} color="#FFFFFF" />
+            <Ionicons name="options-outline" size={20} color="#090A0F" />
             <Text style={styles.actionButtonText}>Edit</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={[styles.actionButton, { backgroundColor: theme.colors.secondary }]}
+            style={[
+              styles.actionButton,
+              styles.secondaryActionButton,
+              { borderColor: theme.colors.border },
+            ]}
             onPress={() => setShowMetadata(!showMetadata)}
+            accessibilityLabel="Toggle photo info"
           >
-            <Ionicons name="information-circle" size={20} color="#FFFFFF" />
-            <Text style={styles.actionButtonText}>Info</Text>
+            <Ionicons name="information-circle-outline" size={20} color={theme.colors.text} />
+            <Text style={[styles.secondaryActionText, { color: theme.colors.text }]}>Info</Text>
           </TouchableOpacity>
         </View>
 
@@ -224,7 +228,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   imageContainer: {
-    flex: 0.6,
+    flex: 0.64,
     position: 'relative',
   },
   fullImage: {
@@ -234,17 +238,17 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 16,
     right: 16,
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: 'rgba(0, 0, 0, 0.3)',
+    width: 42,
+    height: 42,
+    borderRadius: 8,
+    backgroundColor: 'rgba(9, 10, 15, 0.72)',
     justifyContent: 'center',
     alignItems: 'center',
   },
   bottomSheet: {
-    flex: 0.4,
-    borderTopLeftRadius: 24,
-    borderTopRightRadius: 24,
+    flex: 0.36,
+    borderTopLeftRadius: 8,
+    borderTopRightRadius: 8,
   },
   actionButtons: {
     flexDirection: 'row',
@@ -258,12 +262,20 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     gap: 8,
     paddingVertical: 12,
-    borderRadius: 12,
+    borderRadius: 8,
+  },
+  secondaryActionButton: {
+    backgroundColor: 'transparent',
+    borderWidth: 1,
   },
   actionButtonText: {
-    color: '#FFFFFF',
+    color: '#090A0F',
     fontSize: 14,
-    fontWeight: '600',
+    fontWeight: '800',
+  },
+  secondaryActionText: {
+    fontSize: 14,
+    fontWeight: '800',
   },
   metadataPanel: {
     paddingHorizontal: 16,

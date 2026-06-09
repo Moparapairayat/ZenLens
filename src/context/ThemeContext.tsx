@@ -28,20 +28,20 @@ export const ThemeTokens = {
     shadowColor: '#000000',
   },
   dark: {
-    background: '#0F172A',
-    surface: '#1E293B',
-    surfaceVariant: '#334155',
-    primary: '#A78BFA', // Neon violet
-    secondary: '#F472B6', // Neon pink
-    accent: '#22D3EE', // Cyan
+    background: '#090A0F',
+    surface: '#15131A',
+    surfaceVariant: '#22202A',
+    primary: '#C8FF5C',
+    secondary: '#FF6B8A',
+    accent: '#4DEEEA',
     text: '#F1F5F9',
-    textSecondary: '#CBD5E1',
-    textTertiary: '#94A3B8',
-    border: '#475569',
+    textSecondary: '#B8B6C7',
+    textTertiary: '#787487',
+    border: '#302D3A',
     success: '#34D399',
     warning: '#FBBF24',
     error: '#F87171',
-    glass: 'rgba(30, 41, 59, 0.7)',
+    glass: 'rgba(21, 19, 26, 0.82)',
     shadowColor: '#000000',
   },
 };
@@ -77,9 +77,9 @@ function createTheme(isDark: boolean): Theme {
     spacing: (factor: number) => factor * 8,
     borderRadius: {
       sm: 8,
-      md: 12,
-      lg: 16,
-      xl: 24,
+      md: 8,
+      lg: 8,
+      xl: 8,
     },
     typography: {
       h1: { fontSize: 28, fontWeight: '700' },

@@ -2,8 +2,8 @@
  * Database Encryption Key Management
  * Generates and stores random DB key in SecureStore
  */
-import * as SecureStore from 'expo-secure-store';
 import CryptoJS from 'crypto-js';
+import { deleteStoredItem, getStoredItem, setStoredItem } from './secureStorage';
 
 const DB_KEY_STORE_KEY = 'zenlens_db_key';
 const DB_KEY_LENGTH = 32;
@@ -26,12 +26,12 @@ function generateRandomKey(length: number = DB_KEY_LENGTH): string {
  */
 export async function initializeSecureStore(): Promise<string> {
   try {
-    let key = await SecureStore.getItemAsync(DB_KEY_STORE_KEY);
+    let key = await getStoredItem(DB_KEY_STORE_KEY);
 
     if (!key) {
       console.log('Generating new database encryption key');
       key = generateRandomKey();
-      await SecureStore.setItemAsync(DB_KEY_STORE_KEY, key);
+      await setStoredItem(DB_KEY_STORE_KEY, key);
     }
 
     return key;
@@ -48,7 +48,7 @@ export async function initializeSecureStore(): Promise<string> {
  */
 export async function getDBKey(): Promise<string> {
   try {
-    const key = await SecureStore.getItemAsync(DB_KEY_STORE_KEY);
+    const key = await getStoredItem(DB_KEY_STORE_KEY);
     if (!key) {
       throw new Error('Database key not found');
     }
@@ -117,7 +117,7 @@ export function verifyHMAC(data: string, hmac: string, key: string): boolean {
  */
 export async function resetDBKey(): Promise<void> {
   try {
-    await SecureStore.deleteItemAsync(DB_KEY_STORE_KEY);
+    await deleteStoredItem(DB_KEY_STORE_KEY);
     console.warn('Database key has been reset - encrypted metadata access will be lost');
   } catch (error) {
     console.error('Failed to reset database key:', error);

@@ -3,7 +3,7 @@
  * Wrapper around native biometric APIs
  */
 import * as LocalAuthentication from 'expo-local-authentication';
-import * as SecureStore from 'expo-secure-store';
+import { deleteStoredItem, getStoredItem, setStoredItem } from './secureStorage';
 
 const BIOMETRIC_ENABLED_KEY = 'zenlens_biometric_enabled';
 
@@ -68,7 +68,7 @@ export async function enableBiometric(): Promise<void> {
       throw new Error('Biometric not available on this device');
     }
 
-    await SecureStore.setItemAsync(BIOMETRIC_ENABLED_KEY, 'true');
+    await setStoredItem(BIOMETRIC_ENABLED_KEY, 'true');
     console.log('Biometric authentication enabled');
   } catch (error) {
     console.error('Failed to enable biometric:', error);
@@ -81,7 +81,7 @@ export async function enableBiometric(): Promise<void> {
  */
 export async function disableBiometric(): Promise<void> {
   try {
-    await SecureStore.deleteItemAsync(BIOMETRIC_ENABLED_KEY);
+    await deleteStoredItem(BIOMETRIC_ENABLED_KEY);
     console.log('Biometric authentication disabled');
   } catch (error) {
     console.error('Failed to disable biometric:', error);
@@ -94,7 +94,7 @@ export async function disableBiometric(): Promise<void> {
  */
 export async function isBiometricEnabled(): Promise<boolean> {
   try {
-    const enabled = await SecureStore.getItemAsync(BIOMETRIC_ENABLED_KEY);
+    const enabled = await getStoredItem(BIOMETRIC_ENABLED_KEY);
     return enabled === 'true';
   } catch (error) {
     console.error('Failed to check biometric enabled status:', error);

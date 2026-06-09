@@ -2,8 +2,8 @@
  * PIN Authentication
  * Secure PIN storage and verification using SHA256
  */
-import * as SecureStore from 'expo-secure-store';
 import CryptoJS from 'crypto-js';
+import { deleteStoredItem, getStoredItem, setStoredItem } from './secureStorage';
 
 const PIN_HASH_KEY = 'zenlens_pin_hash';
 const PIN_SALT_KEY = 'zenlens_pin_salt';
@@ -43,8 +43,8 @@ export async function setPIN(pin: string): Promise<void> {
     const salt = generateSalt();
     const hash = hashPIN(pin, salt);
 
-    await SecureStore.setItemAsync(PIN_SALT_KEY, salt);
-    await SecureStore.setItemAsync(PIN_HASH_KEY, hash);
+    await setStoredItem(PIN_SALT_KEY, salt);
+    await setStoredItem(PIN_HASH_KEY, hash);
 
     console.log('PIN set successfully');
   } catch (error) {
@@ -58,8 +58,8 @@ export async function setPIN(pin: string): Promise<void> {
  */
 export async function verifyPIN(pin: string): Promise<boolean> {
   try {
-    const salt = await SecureStore.getItemAsync(PIN_SALT_KEY);
-    const storedHash = await SecureStore.getItemAsync(PIN_HASH_KEY);
+    const salt = await getStoredItem(PIN_SALT_KEY);
+    const storedHash = await getStoredItem(PIN_HASH_KEY);
 
     if (!salt || !storedHash) {
       console.warn('PIN not set');
@@ -85,7 +85,7 @@ export async function verifyPIN(pin: string): Promise<boolean> {
  */
 export async function isPINConfigured(): Promise<boolean> {
   try {
-    const hash = await SecureStore.getItemAsync(PIN_HASH_KEY);
+    const hash = await getStoredItem(PIN_HASH_KEY);
     return !!hash;
   } catch (error) {
     console.error('Failed to check PIN configuration:', error);
@@ -99,8 +99,8 @@ export async function isPINConfigured(): Promise<boolean> {
  */
 export async function resetPIN(): Promise<void> {
   try {
-    await SecureStore.deleteItemAsync(PIN_HASH_KEY);
-    await SecureStore.deleteItemAsync(PIN_SALT_KEY);
+    await deleteStoredItem(PIN_HASH_KEY);
+    await deleteStoredItem(PIN_SALT_KEY);
     console.warn('PIN has been reset - encrypted metadata access will be lost');
   } catch (error) {
     console.error('Failed to reset PIN:', error);

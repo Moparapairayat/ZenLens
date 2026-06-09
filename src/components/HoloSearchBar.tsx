@@ -22,7 +22,7 @@ export default function HoloSearchBar({
   const [isFocused, setIsFocused] = useState(false);
   const scaleAnim = useRef(new Animated.Value(1)).current;
 
-  const handleFocus = () => {
+  const handleFocus = (): void => {
     setIsFocused(true);
     Animated.spring(scaleAnim, {
       toValue: 1.02,
@@ -30,7 +30,7 @@ export default function HoloSearchBar({
     }).start();
   };
 
-  const handleBlur = () => {
+  const handleBlur = (): void => {
     setIsFocused(false);
     Animated.spring(scaleAnim, {
       toValue: 1,
@@ -39,21 +39,14 @@ export default function HoloSearchBar({
   };
 
   return (
-    <Animated.View
-      style={[
-        styles.container,
-        {
-          transform: [{ scale: scaleAnim }],
-        },
-      ]}
-    >
+    <Animated.View style={[styles.container, { transform: [{ scale: scaleAnim }] }]}>
       <View
         style={[
           styles.searchBar,
           {
             backgroundColor: theme.colors.surface,
             borderColor: isFocused ? theme.colors.primary : theme.colors.border,
-            borderWidth: isFocused ? 2 : 1,
+            borderWidth: 1,
           },
         ]}
       >
@@ -77,10 +70,11 @@ export default function HoloSearchBar({
               color: theme.colors.text,
             },
           ]}
+          accessibilityLabel="Search"
         />
 
         {value.length > 0 && (
-          <TouchableOpacity onPress={() => onChangeText('')}>
+          <TouchableOpacity onPress={() => onChangeText('')} accessibilityLabel="Clear search">
             <Ionicons name="close-circle" size={20} color={theme.colors.textTertiary} />
           </TouchableOpacity>
         )}
@@ -91,7 +85,6 @@ export default function HoloSearchBar({
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 16,
     paddingVertical: 12,
   },
   searchBar: {
@@ -99,7 +92,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 12,
     paddingVertical: 10,
-    borderRadius: 12,
+    borderRadius: 8,
     gap: 8,
   },
   icon: {
