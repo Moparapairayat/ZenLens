@@ -2,5 +2,10 @@ Starting project at D:\ZenLens
 Logs: D:\ZenLens\.expo\dev\logs\start.log
 Starting Metro Bundler
 
+› Opening exp+zenlens://expo-development-client/?url=http%3A%2F%2F192.168.1.101%3A8081 on V2120
 Waiting on http://localhost:8081
 Logs for your project will appear below.
+Android Bundled 12668ms node_modules\expo\AppEntry.js (1886 modules)
+ LOG  Generating new database encryption key
+Android Bundled 73ms node_modules\expo\AppEntry.js (1 module)
+Android Bundled 58ms node_modules\expo\AppEntry.js (1 module)

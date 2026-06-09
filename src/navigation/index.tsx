@@ -41,7 +41,7 @@ function GalleryStackNavigator() {
       <Stack.Screen
         name="GalleryMain"
         component={GalleryScreen}
-        options={{ title: 'ZenLens Gallery' }}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="PhotoView"
@@ -55,7 +55,7 @@ function GalleryStackNavigator() {
         name="Editor"
         component={EditorScreen}
         options={{
-          title: 'Edit Photo',
+          headerShown: false,
           presentation: 'modal',
         }}
       />
@@ -106,7 +106,6 @@ export function RootNavigator(): JSX.Element {
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="search" size={size} color={color} />
           ),
-          headerShown: true,
         }}
       />
       <Tab.Screen
@@ -117,7 +116,6 @@ export function RootNavigator(): JSX.Element {
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="folder" size={size} color={color} />
           ),
-          headerShown: true,
         }}
       />
     </Tab.Navigator>

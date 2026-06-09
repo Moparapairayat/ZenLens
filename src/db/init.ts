@@ -245,7 +245,7 @@ function createMemoryDatabase(): ZenLensDatabase {
     async runAsync(source: string, params: SQLiteValue[] = []): Promise<unknown> {
       const normalized = source.replace(/\s+/g, ' ').trim();
 
-      if (normalized.startsWith('INSERT INTO media')) {
+      if (normalized.startsWith('INSERT INTO media') || normalized.startsWith('INSERT OR REPLACE INTO media')) {
         const [
           id,
           uri,
@@ -260,6 +260,9 @@ function createMemoryDatabase(): ZenLensDatabase {
           isVideo,
           albumId,
         ] = params;
+        const explicitDeleted = params.length > 12 ? Number(params[11]) : 0;
+        const explicitDeletedAt = params.length > 12 ? params[12] : null;
+        const explicitAlbumId = params.length > 12 ? params[13] : albumId;
         media.set(String(id), {
           id: String(id),
           uri: String(uri),
@@ -272,9 +275,9 @@ function createMemoryDatabase(): ZenLensDatabase {
           createdAt: Number(createdAt),
           modifiedAt: Number(modifiedAt),
           isVideo: Number(isVideo),
-          isDeleted: 0,
-          deletedAt: null,
-          albumId: albumId == null ? null : String(albumId),
+          isDeleted: explicitDeleted,
+          deletedAt: explicitDeletedAt == null ? null : Number(explicitDeletedAt),
+          albumId: explicitAlbumId == null ? null : String(explicitAlbumId),
         });
       }
 

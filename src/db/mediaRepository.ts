@@ -129,6 +129,33 @@ export async function addMediaRecord(media: Omit<MediaRecord, 'id'>): Promise<st
 }
 
 /**
+ * Upsert an existing media-library asset using its stable platform ID.
+ */
+export async function upsertMediaRecord(media: MediaRecord): Promise<void> {
+  const db = await getDatabase();
+
+  await db.runAsync(
+    `INSERT OR REPLACE INTO media
+      (id, uri, filename, width, height, duration, mimeType, fileSize, createdAt, modifiedAt, isVideo, isDeleted, deletedAt, albumId)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0, null, ?)`,
+    [
+      media.id,
+      media.uri,
+      media.filename,
+      media.width,
+      media.height,
+      media.duration ?? null,
+      media.mimeType ?? null,
+      media.fileSize ?? null,
+      media.createdAt,
+      media.modifiedAt,
+      media.isVideo ? 1 : 0,
+      media.albumId ?? null,
+    ]
+  );
+}
+
+/**
  * Get media record by ID.
  */
 export async function getMediaRecord(mediaId: string): Promise<MediaRecord | null> {

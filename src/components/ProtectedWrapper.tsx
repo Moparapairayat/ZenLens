@@ -149,7 +149,6 @@ export default function ProtectedWrapper({ children }: ProtectedWrapperProps): J
     <>
       {children}
 
-      {/* Lock Screen Overlay */}
       <Animated.View
         style={[
           styles.overlay,
@@ -161,59 +160,64 @@ export default function ProtectedWrapper({ children }: ProtectedWrapperProps): J
         exiting={FadeOut.duration(300)}
       >
         <View style={styles.lockContainer}>
-          {/* Logo / Header */}
+          <View style={[styles.lockMark, { backgroundColor: theme.colors.primary }]}>
+            <Ionicons name="lock-closed" size={26} color="#090A0F" />
+          </View>
+
           <View style={styles.header}>
-            <Ionicons name="lock-closed" size={48} color={theme.colors.primary} />
-            <Text
-              style={[
-                styles.title,
-                {
-                  color: theme.colors.text,
-                },
-              ]}
-            >
-              ZenLens Locked
+            <Text style={[styles.eyebrow, { color: theme.colors.accent }]}>PRIVATE VAULT</Text>
+            <Text style={[styles.title, { color: theme.colors.text }]}>ZenLens locked</Text>
+            <Text style={[styles.subtitle, { color: theme.colors.textSecondary }]}>
+              Enter your 4-digit key to restore local access.
             </Text>
           </View>
 
-          {/* PIN Input */}
           <View style={styles.pinInputContainer}>
+            <View style={styles.pinDots}>
+              {[0, 1, 2, 3].map((index) => (
+                <View
+                  key={index}
+                  style={[
+                    styles.pinDot,
+                    {
+                      borderColor: pinError ? theme.colors.error : theme.colors.border,
+                      backgroundColor: pin.length > index ? theme.colors.primary : theme.colors.surface,
+                    },
+                  ]}
+                />
+              ))}
+            </View>
+
             <TextInput
               style={[
                 styles.pinInput,
                 {
                   color: theme.colors.text,
                   borderColor: pinError ? theme.colors.error : theme.colors.border,
+                  backgroundColor: theme.colors.surface,
                 },
               ]}
-              placeholder="Enter PIN"
+              placeholder="PIN"
               placeholderTextColor={theme.colors.textTertiary}
               value={pin}
               onChangeText={(text) => {
-                setPin(text);
+                setPin(text.replace(/\D/g, ''));
                 setError('');
               }}
               secureTextEntry
               keyboardType="number-pad"
               maxLength={4}
-              editable={!showBiometric}
+              editable
+              accessibilityLabel="Enter 4 digit PIN"
             />
 
             {pinError && (
-              <Text
-                style={[
-                  styles.errorText,
-                  {
-                    color: theme.colors.error,
-                  },
-                ]}
-              >
+              <Text style={[styles.errorText, { color: theme.colors.error }]}>
                 {pinError}
               </Text>
             )}
           </View>
 
-          {/* Action Buttons */}
           <View style={styles.buttonContainer}>
             <TouchableOpacity
               style={[
@@ -223,22 +227,25 @@ export default function ProtectedWrapper({ children }: ProtectedWrapperProps): J
                 },
               ]}
               onPress={handlePINSubmit}
+              accessibilityLabel="Unlock with PIN"
             >
-              <Text style={styles.buttonText}>Unlock</Text>
+              <Ionicons name="key-outline" size={19} color="#090A0F" />
+              <Text style={styles.primaryButtonText}>Unlock</Text>
             </TouchableOpacity>
 
             {showBiometric && (
               <TouchableOpacity
                 style={[
-                  styles.button,
+                  styles.secondaryButton,
                   {
-                    backgroundColor: theme.colors.secondary,
+                    borderColor: theme.colors.border,
                   },
                 ]}
                 onPress={handleBiometricAuth}
+                accessibilityLabel="Unlock with biometric authentication"
               >
-                <Ionicons name="finger-print" size={20} color="#FFFFFF" />
-                <Text style={styles.buttonText}>Biometric</Text>
+                <Ionicons name="finger-print" size={20} color={theme.colors.text} />
+                <Text style={[styles.secondaryButtonText, { color: theme.colors.text }]}>Biometric</Text>
               </TouchableOpacity>
             )}
           </View>
@@ -253,28 +260,65 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFill,
     justifyContent: 'center',
     alignItems: 'center',
+    paddingHorizontal: 22,
     zIndex: 999,
   },
   lockContainer: {
-    width: '80%',
+    width: '100%',
+    maxWidth: 390,
+    padding: 20,
+    borderRadius: 8,
     alignItems: 'center',
-    gap: 32,
+    gap: 20,
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.12)',
+    backgroundColor: 'rgba(21, 19, 26, 0.92)',
+  },
+  lockMark: {
+    width: 58,
+    height: 58,
+    borderRadius: 8,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   header: {
     alignItems: 'center',
-    gap: 12,
+    gap: 6,
+  },
+  eyebrow: {
+    fontSize: 11,
+    fontWeight: '900',
+    letterSpacing: 0,
   },
   title: {
-    fontSize: 24,
-    fontWeight: '700',
+    fontSize: 28,
+    fontWeight: '900',
+    letterSpacing: 0,
+  },
+  subtitle: {
+    maxWidth: 270,
+    textAlign: 'center',
+    fontSize: 14,
+    lineHeight: 20,
   },
   pinInputContainer: {
     width: '100%',
-    gap: 8,
+    gap: 12,
+  },
+  pinDots: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: 10,
+  },
+  pinDot: {
+    width: 34,
+    height: 40,
+    borderRadius: 8,
+    borderWidth: 1,
   },
   pinInput: {
-    borderWidth: 2,
-    borderRadius: 12,
+    borderWidth: 1,
+    borderRadius: 8,
     paddingHorizontal: 16,
     paddingVertical: 12,
     fontSize: 18,
@@ -283,24 +327,37 @@ const styles = StyleSheet.create({
   },
   errorText: {
     fontSize: 12,
-    fontWeight: '500',
+    fontWeight: '800',
     textAlign: 'center',
   },
   buttonContainer: {
     width: '100%',
-    gap: 12,
+    gap: 10,
   },
   button: {
     flexDirection: 'row',
-    paddingVertical: 12,
-    borderRadius: 12,
+    minHeight: 46,
+    borderRadius: 8,
     justifyContent: 'center',
     alignItems: 'center',
     gap: 8,
   },
-  buttonText: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontWeight: '600',
+  secondaryButton: {
+    minHeight: 46,
+    borderRadius: 8,
+    borderWidth: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 8,
+  },
+  primaryButtonText: {
+    color: '#090A0F',
+    fontSize: 14,
+    fontWeight: '900',
+  },
+  secondaryButtonText: {
+    fontSize: 14,
+    fontWeight: '900',
   },
 });

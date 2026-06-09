@@ -4,6 +4,7 @@
  */
 import React, { useCallback, useEffect, useState } from 'react';
 import { ActivityIndicator, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from '../styles/theme';
 import { getAllMedia, getMetadataRecord } from '../db/mediaRepository';
@@ -130,14 +131,14 @@ export default function SmartAlbumsScreen({ navigation }: SmartAlbumsScreenProps
 
   if (isLoading) {
     return (
-      <View style={[styles.center, { backgroundColor: theme.colors.background }]}>
+      <SafeAreaView style={[styles.center, { backgroundColor: theme.colors.background }]}>
         <ActivityIndicator size="large" color={theme.colors.primary} />
-      </View>
+      </SafeAreaView>
     );
   }
 
   return (
-    <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
+    <SafeAreaView style={[styles.container, { backgroundColor: theme.colors.background }]}>
       <View style={styles.header}>
         <View>
           <Text style={[styles.eyebrow, { color: theme.colors.secondary }]}>SMART SETS</Text>
@@ -191,7 +192,7 @@ export default function SmartAlbumsScreen({ navigation }: SmartAlbumsScreenProps
           </GlassCard>
         </View>
       )}
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -253,7 +254,7 @@ const styles = StyleSheet.create({
     fontWeight: '800',
   },
   listContent: {
-    paddingBottom: 18,
+    paddingBottom: 112,
     gap: 10,
   },
   albumCard: {
@@ -305,6 +306,7 @@ const styles = StyleSheet.create({
   },
   emptyContainer: {
     flex: 1,
+    paddingBottom: 96,
     justifyContent: 'center',
   },
   emptyCard: {

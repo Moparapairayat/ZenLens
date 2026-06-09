@@ -12,6 +12,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 import { useTheme } from '../styles/theme';
@@ -113,94 +114,93 @@ export default function GalleryScreen({ navigation }: GalleryScreenProps): JSX.E
 
   if (isLoading && mediaItems.length === 0) {
     return (
-      <View style={[styles.center, { backgroundColor: theme.colors.background }]}>
+      <SafeAreaView style={[styles.center, { backgroundColor: theme.colors.background }]}>
         <ActivityIndicator size="large" color={theme.colors.primary} />
-      </View>
+      </SafeAreaView>
     );
   }
 
   if (mediaItems.length === 0) {
     return (
-      <ScrollView
-        style={[styles.container, { backgroundColor: theme.colors.background }]}
-        contentContainerStyle={styles.emptyContent}
-      >
-        <View style={styles.heroRow}>
-          <View style={styles.titleBlock}>
-            <Text style={[styles.eyebrow, { color: theme.colors.primary }]}>ZENLENS</Text>
-            <Text style={[styles.title, { color: theme.colors.text }]}>Local gallery intelligence</Text>
-            <Text style={[styles.subtitle, { color: theme.colors.textSecondary }]}>
-              {Platform.OS === 'web'
-                ? 'Web preview is ready. Native media appears after device permission.'
-                : 'Media appears after library permission and background indexing.'}
-            </Text>
-          </View>
-
-          <View style={[styles.liveBadge, { borderColor: theme.colors.border }]}>
-            <Ionicons name="radio" size={16} color={theme.colors.accent} />
-            <Text style={[styles.liveBadgeText, { color: theme.colors.textSecondary }]}>Local</Text>
-          </View>
-        </View>
-
-        <View style={styles.metricsRow}>
-          <GlassCard style={styles.metricCard}>
-            <Ionicons name="images-outline" size={18} color={theme.colors.primary} />
-            <Text style={[styles.metricValue, { color: theme.colors.text }]}>{indexedLabel}</Text>
-            <Text style={[styles.metricLabel, { color: theme.colors.textTertiary }]}>Indexed</Text>
-          </GlassCard>
-          <GlassCard style={styles.metricCard}>
-            <Ionicons name="sparkles-outline" size={18} color={theme.colors.accent} />
-            <Text style={[styles.metricValue, { color: theme.colors.text }]}>On</Text>
-            <Text style={[styles.metricLabel, { color: theme.colors.textTertiary }]}>AI queue</Text>
-          </GlassCard>
-          <GlassCard style={styles.metricCard}>
-            <Ionicons name="shield-checkmark-outline" size={18} color={theme.colors.secondary} />
-            <Text style={[styles.metricValue, { color: theme.colors.text }]}>Private</Text>
-            <Text style={[styles.metricLabel, { color: theme.colors.textTertiary }]}>Storage</Text>
-          </GlassCard>
-        </View>
-
-        <View style={styles.previewGrid}>
-          {previewTiles.map((tile, index) => (
-            <View
-              key={tile.color}
-              style={[
-                styles.previewTile,
-                {
-                  height: tile.height,
-                  backgroundColor: tile.color,
-                  opacity: 0.18 + index * 0.05,
-                  borderColor: theme.colors.border,
-                },
-              ]}
-            >
-              <Ionicons
-                name={index % 2 === 0 ? 'aperture-outline' : 'scan-outline'}
-                size={22}
-                color={tile.color}
-              />
+      <SafeAreaView style={[styles.container, { backgroundColor: theme.colors.background }]}>
+        <ScrollView style={styles.container} contentContainerStyle={styles.emptyContent}>
+          <View style={styles.heroRow}>
+            <View style={styles.titleBlock}>
+              <Text style={[styles.eyebrow, { color: theme.colors.primary }]}>ZENLENS</Text>
+              <Text style={[styles.title, { color: theme.colors.text }]}>Local gallery intelligence</Text>
+              <Text style={[styles.subtitle, { color: theme.colors.textSecondary }]}>
+                {Platform.OS === 'web'
+                  ? 'Web preview is ready. Native media appears after device permission.'
+                  : 'Media appears after library permission and background indexing.'}
+              </Text>
             </View>
-          ))}
-        </View>
 
-        <GlassCard style={styles.statusPanel}>
-          <View style={styles.statusIcon}>
-            <Ionicons name="cloud-offline-outline" size={22} color={theme.colors.primary} />
+            <View style={[styles.liveBadge, { borderColor: theme.colors.border }]}>
+              <Ionicons name="radio" size={16} color={theme.colors.accent} />
+              <Text style={[styles.liveBadgeText, { color: theme.colors.textSecondary }]}>Local</Text>
+            </View>
           </View>
-          <View style={styles.statusText}>
-            <Text style={[styles.statusTitle, { color: theme.colors.text }]}>Offline index waiting</Text>
-            <Text style={[styles.statusBody, { color: theme.colors.textSecondary }]}>
-              Use Android or iOS to grant library access. Web preview keeps the interface visible without
-              reading local photos.
-            </Text>
+
+          <View style={styles.metricsRow}>
+            <GlassCard style={styles.metricCard}>
+              <Ionicons name="images-outline" size={18} color={theme.colors.primary} />
+              <Text style={[styles.metricValue, { color: theme.colors.text }]}>{indexedLabel}</Text>
+              <Text style={[styles.metricLabel, { color: theme.colors.textTertiary }]}>Indexed</Text>
+            </GlassCard>
+            <GlassCard style={styles.metricCard}>
+              <Ionicons name="sparkles-outline" size={18} color={theme.colors.accent} />
+              <Text style={[styles.metricValue, { color: theme.colors.text }]}>On</Text>
+              <Text style={[styles.metricLabel, { color: theme.colors.textTertiary }]}>AI queue</Text>
+            </GlassCard>
+            <GlassCard style={styles.metricCard}>
+              <Ionicons name="shield-checkmark-outline" size={18} color={theme.colors.secondary} />
+              <Text style={[styles.metricValue, { color: theme.colors.text }]}>Private</Text>
+              <Text style={[styles.metricLabel, { color: theme.colors.textTertiary }]}>Storage</Text>
+            </GlassCard>
           </View>
-        </GlassCard>
-      </ScrollView>
+
+          <View style={styles.previewGrid}>
+            {previewTiles.map((tile, index) => (
+              <View
+                key={tile.color}
+                style={[
+                  styles.previewTile,
+                  {
+                    height: tile.height,
+                    backgroundColor: tile.color,
+                    opacity: 0.18 + index * 0.05,
+                    borderColor: theme.colors.border,
+                  },
+                ]}
+              >
+                <Ionicons
+                  name={index % 2 === 0 ? 'aperture-outline' : 'scan-outline'}
+                  size={22}
+                  color={tile.color}
+                />
+              </View>
+            ))}
+          </View>
+
+          <GlassCard style={styles.statusPanel}>
+            <View style={styles.statusIcon}>
+              <Ionicons name="cloud-offline-outline" size={22} color={theme.colors.primary} />
+            </View>
+            <View style={styles.statusText}>
+              <Text style={[styles.statusTitle, { color: theme.colors.text }]}>Offline index waiting</Text>
+              <Text style={[styles.statusBody, { color: theme.colors.textSecondary }]}>
+                Use Android or iOS to grant library access. Web preview keeps the interface visible without
+                reading local photos.
+              </Text>
+            </View>
+          </GlassCard>
+        </ScrollView>
+      </SafeAreaView>
     );
   }
 
   return (
-    <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
+    <SafeAreaView style={[styles.container, { backgroundColor: theme.colors.background }]}>
       <View style={styles.loadedHeader}>
         <View>
           <Text style={[styles.eyebrow, { color: theme.colors.primary }]}>LIBRARY</Text>
@@ -223,7 +223,7 @@ export default function GalleryScreen({ navigation }: GalleryScreenProps): JSX.E
         ListFooterComponent={renderFooter}
         keyExtractor={(item) => item.id}
       />
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -238,6 +238,7 @@ const styles = StyleSheet.create({
   },
   emptyContent: {
     padding: 18,
+    paddingBottom: 112,
     gap: 18,
   },
   heroRow: {

@@ -4,6 +4,7 @@
  */
 import React, { useCallback, useEffect, useState } from 'react';
 import { ActivityIndicator, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from '../styles/theme';
 import { getAllMedia, getMetadataRecord, type MediaRecord } from '../db/mediaRepository';
@@ -121,7 +122,7 @@ export default function SearchScreen({ navigation }: SearchScreenProps): JSX.Ele
   );
 
   return (
-    <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
+    <SafeAreaView style={[styles.container, { backgroundColor: theme.colors.background }]}>
       <ScrollView contentContainerStyle={styles.headerContent}>
         <View style={styles.headerRow}>
           <View style={styles.headerText}>
@@ -187,7 +188,7 @@ export default function SearchScreen({ navigation }: SearchScreenProps): JSX.Ele
           </GlassCard>
         </View>
       )}
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -281,6 +282,7 @@ const styles = StyleSheet.create({
   emptyContainer: {
     flex: 1,
     paddingHorizontal: 16,
+    paddingBottom: 96,
     justifyContent: 'center',
   },
   emptyCard: {

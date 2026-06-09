@@ -1,10 +1,10 @@
 /**
  * Skia Filter Preview Component
- * Real-time GPU filter preview using Shopify React Native Skia
+ * Real-time GPU filter preview surface.
  */
-import React, { useEffect, useRef, useState } from 'react';
-import { View, StyleSheet, Image } from 'react-native';
-import { Canvas, Image as SkiaImage, useImage, Paint } from '@shopify/react-native-skia';
+import React, { useMemo, useState } from 'react';
+import { ActivityIndicator, LayoutChangeEvent, StyleSheet, View } from 'react-native';
+import { Canvas, Image as SkiaImage, useImage } from '@shopify/react-native-skia';
 
 interface SkiaFilterPreviewProps {
   uri: string;
@@ -22,41 +22,52 @@ export default function SkiaFilterPreview({
   filterType = 'original',
 }: SkiaFilterPreviewProps): JSX.Element {
   const image = useImage(uri);
+  const [canvasSize, setCanvasSize] = useState({ width: 0, height: 0 });
 
-  if (!image) {
-    return <View style={styles.container} />;
-  }
+  const imageFrame = useMemo(() => {
+    if (!image || canvasSize.width === 0 || canvasSize.height === 0) return null;
 
-  /**
-   * Apply adjustments and filters
-   * Note: Actual filter implementation requires Skia shader manipulation
-   */
-  const applyFilters = () => {
-    // TODO: Implement Skia filters
-    // Options:
-    // 1. Use shader code for custom filters
-    // 2. Use built-in transforms
-    // 3. Apply color matrices
+    const imageAspect = image.width() / image.height();
+    const canvasAspect = canvasSize.width / canvasSize.height;
+    const width = imageAspect > canvasAspect ? canvasSize.width : canvasSize.height * imageAspect;
+    const height = imageAspect > canvasAspect ? canvasSize.width / imageAspect : canvasSize.height;
+
     return {
-      exposure: adjustments.exposure,
-      contrast: adjustments.contrast,
-      saturation: adjustments.saturation,
+      x: (canvasSize.width - width) / 2,
+      y: (canvasSize.height - height) / 2,
+      width,
+      height,
     };
+  }, [canvasSize.height, canvasSize.width, image]);
+
+  const handleLayout = (event: LayoutChangeEvent): void => {
+    const { width, height } = event.nativeEvent.layout;
+    setCanvasSize({ width, height });
   };
 
-  applyFilters();
+  // Kept as an explicit dependency point for future shader/color-matrix work.
+  const previewState = `${filterType}:${adjustments.exposure}:${adjustments.contrast}:${adjustments.saturation}`;
+  void previewState;
 
   return (
-    <View style={styles.container}>
-      <Canvas style={styles.canvas}>
-        <SkiaImage
-          image={image}
-          x={0}
-          y={0}
-          width={image.width()}
-          height={image.height()}
-        />
-      </Canvas>
+    <View style={styles.container} onLayout={handleLayout}>
+      {!imageFrame && (
+        <View style={styles.loadingState}>
+          <ActivityIndicator color="#C8FF5C" />
+        </View>
+      )}
+
+      {image && imageFrame && (
+        <Canvas style={styles.canvas}>
+          <SkiaImage
+            image={image}
+            x={imageFrame.x}
+            y={imageFrame.y}
+            width={imageFrame.width}
+            height={imageFrame.height}
+          />
+        </Canvas>
+      )}
     </View>
   );
 }
@@ -64,9 +75,18 @@ export default function SkiaFilterPreview({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000000',
+    backgroundColor: '#05060A',
   },
   canvas: {
     flex: 1,
+  },
+  loadingState: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
